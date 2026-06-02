@@ -405,7 +405,7 @@ button, input, select {
 
 .table-header {
   display: grid;
-  grid-template-columns: 2.4fr 1.8fr 0.8fr 0.9fr 1.4fr 0.7fr;
+  grid-template-columns: 2.2fr 1.6fr 0.7fr 0.8fr 1.3fr 1.4fr;
   padding: 0.85rem 1.5rem;
   border-bottom: 1px solid var(--border-color);
   color: var(--text-secondary);
@@ -430,7 +430,7 @@ button, input, select {
 
 .song-row {
   display: grid;
-  grid-template-columns: 2.4fr 1.8fr 0.8fr 0.9fr 1.4fr 0.7fr;
+  grid-template-columns: 2.2fr 1.6fr 0.7fr 0.8fr 1.3fr 1.4fr;
   padding: 0.9rem 1.5rem;
   border-bottom: 1px solid rgba(15, 23, 42, 0.04);
   align-items: center;

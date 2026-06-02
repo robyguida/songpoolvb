@@ -121,6 +121,15 @@ function renderSongs() {
       return a.bpm - b.bpm;
     } else if (sortOption === 'key') {
       return a.key.localeCompare(b.key);
+    } else if (sortOption === 'language') {
+      // Order: English (en) first, Swiss German (de-ch) second, German (de) third
+      const langOrder = { 'en': 1, 'de-ch': 2, 'de': 3 };
+      const orderA = langOrder[a.language] || 99;
+      const orderB = langOrder[b.language] || 99;
+      if (orderA !== orderB) {
+        return orderA - orderB;
+      }
+      return a.title.localeCompare(b.title);
     }
     return 0;
   });
@@ -163,10 +172,7 @@ function renderSongs() {
         <span class="key-pill ${isMinor ? 'minor' : ''}">${song.key}</span>
       </div>
       <div class="td-col col-bpm">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width: 0.8rem; height: 0.8rem; display: inline; vertical-align: middle; margin-right: 0.25rem;">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        ${song.bpm} <span class="bpm-label">BPM</span>
+        ${song.bpm}
       </div>
       <div class="td-col col-theme">${song.theme}</div>
       <div class="td-col col-actions">

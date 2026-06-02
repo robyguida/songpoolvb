@@ -11,7 +11,8 @@ const SONGS = [
     author: "VIBE",
     key: "C",
     bpm: 74,
-    theme: "Worship",
+    theme: "Anbetung",
+    language: "de-ch",
     youtube: "https://www.youtube.com/results?search_query=VIBE+Chum+zu+mir",
     chords: `[Verse 1]
 [C]Chum zu mir, ich [G]wart uf di
@@ -37,7 +38,8 @@ const SONGS = [
     author: "Conny Guida",
     key: "G",
     bpm: 68,
-    theme: "Praise / Thanksgiving",
+    theme: "Lobpreis / Dankbarkeit",
+    language: "de-ch",
     youtube: "https://www.youtube.com/results?search_query=Conny+Guida+Danke+f%C3%BCr+dis+Chr%C3%BCz",
     chords: `[Verse 1]
 [G]Danke für dis [D]Chrüz, oh Herr
@@ -61,7 +63,8 @@ const SONGS = [
     author: "AUDIEL",
     key: "E",
     bpm: 80,
-    theme: "Joy / Walking with God",
+    theme: "Freude / Weg mit Gott",
+    language: "de-ch",
     youtube: "https://www.youtube.com/results?search_query=AUDIEL+Der+Sunne+entg%C3%A4ge",
     chords: `[Verse 1]
 [E]Ich loufe der [B]Sunne entgäge
@@ -87,7 +90,8 @@ const SONGS = [
     author: "Romano Soltermann",
     key: "D",
     bpm: 70,
-    theme: "Worship / Devotion",
+    theme: "Anbetung / Hingabe",
+    language: "de-ch",
     youtube: "https://www.youtube.com/results?search_query=Romano+Soltermann+Du+bisch+mi+Gott",
     chords: `[Verse 1]
 [D]Du bisch mi Gott, i [A]bäte di a
@@ -113,7 +117,8 @@ const SONGS = [
     author: "AudiEL",
     key: "A",
     bpm: 108,
-    theme: "Celebration / Upbeat",
+    theme: "Feier / Upbeat",
+    language: "de-ch",
     youtube: "https://www.youtube.com/results?search_query=AudiEL+Gross+usecho",
     chords: `[Verse 1]
 [A]Hüt wämmer [E]fiiere und danke
@@ -139,7 +144,8 @@ const SONGS = [
     author: "Eden",
     key: "G",
     bpm: 72,
-    theme: "Worship / Love of God",
+    theme: "Anbetung / Liebe Gottes",
+    language: "de-ch",
     youtube: "https://www.youtube.com/results?search_query=Eden+Gwautigi+Liebi",
     chords: `[Verse 1]
 [G]Gwautigi Liebi, [D]döif wie ds Meer
@@ -165,7 +171,8 @@ const SONGS = [
     author: "Romano Soltermann",
     key: "C",
     bpm: 65,
-    theme: "Adoration / Holiness",
+    theme: "Anbetung / Heiligkeit",
+    language: "de-ch",
     youtube: "https://www.youtube.com/results?search_query=Romano+Soltermann+Heilig+bisch+du+Herr",
     chords: `[Verse 1]
 [C]Heilig bisch [G]du, Herr vo [Am]därä Wält
@@ -191,7 +198,8 @@ const SONGS = [
     author: "Bethel",
     key: "G",
     bpm: 72,
-    theme: "Worship / Majesty",
+    theme: "Anbetung / Majestät",
+    language: "de-ch",
     youtube: "https://www.youtube.com/results?search_query=Bethel+Holy+Forever",
     chords: `[Verse 1]
 [G]Tusig Generatione [C]stönd vor [G]dir
@@ -222,7 +230,8 @@ Du blibsch [Em]heilig [D]für immer
     author: "Yahu",
     key: "Am",
     bpm: 75,
-    theme: "Trinitarian / Worship",
+    theme: "Dreifaltigkeit / Anbetung",
+    language: "de",
     youtube: "https://www.youtube.com/results?search_query=Yahu+Heiligi+Dr%C3%BCeinigkeit",
     chords: `[Verse 1]
 [Am]Vater im Himmel, wir [F]bäten dich an
@@ -248,7 +257,8 @@ Du blibsch [Em]heilig [D]für immer
     author: "Joël Mürner",
     key: "D",
     bpm: 68,
-    theme: "Intimacy / Secret Place",
+    theme: "Intimität / Stiller Ort",
+    language: "de-ch",
     youtube: "https://www.youtube.com/results?search_query=Jo%C3%ABl+M%C3%BCrner+I+chum%C3%A4+a+d%C3%A4+Ort",
     chords: `[Verse 1]
 [D]I chumä a dä [A/C#]Ort vo diner [Bm]Gägäwart [G]
@@ -274,7 +284,8 @@ Du blibsch [Em]heilig [D]für immer
     author: "Vineyard International",
     key: "D",
     bpm: 72,
-    theme: "Presence / Rest",
+    theme: "Gegenwart / Ruhe",
+    language: "en",
     youtube: "https://www.youtube.com/results?search_query=Vineyard+I+love+your+presence",
     chords: `[Verse 1]
 [D]In the quiet [G/B]of the morning
@@ -300,7 +311,8 @@ Du blibsch [Em]heilig [D]für immer
     author: "Amanda Cook",
     key: "G",
     bpm: 74,
-    theme: "Worship / Refuge",
+    theme: "Anbetung / Zuflucht",
+    language: "en",
     youtube: "https://www.youtube.com/results?search_query=Amanda+Cook+I+will+exalt",
     chords: `[Verse 1]
 [G]Your presence is [C]all I need
@@ -326,7 +338,8 @@ Du blibsch [Em]heilig [D]für immer
     author: "Vineyard International",
     key: "G",
     bpm: 68,
-    theme: "Adoration / Jesus' Name",
+    theme: "Anbetung / Name Jesu",
+    language: "de",
     youtube: "https://www.youtube.com/results?search_query=Jesus+Jesus+heilig+und+gesalbt",
     chords: `[Verse 1]
 [G]Jesus, [Bm]Jesus,
@@ -356,7 +369,8 @@ dein [C]Wort ist ein [Em]Licht auf meinem Weg.
     author: "David Ruis",
     key: "C",
     bpm: 76,
-    theme: "Kingdom / Revival",
+    theme: "Reich Gottes / Erweckung",
+    language: "en",
     youtube: "https://www.youtube.com/results?search_query=David+Ruis+Let+Your+Glory+Fall",
     chords: `[Verse 1]
 [C]Father of [F]creation, [G]fold us in Your [C]arms
@@ -382,7 +396,8 @@ dein [C]Wort ist ein [Em]Licht auf meinem Weg.
     author: "Eden",
     key: "G",
     bpm: 120,
-    theme: "Celebration / Upbeat Praise",
+    theme: "Feier / Lobpreis",
+    language: "de-ch",
     youtube: "https://www.youtube.com/results?search_query=Eden+Lob",
     chords: `[Verse 1]
 [G]Es Lied vo Lob [C]stygt uf zu dir
@@ -408,7 +423,8 @@ dein [C]Wort ist ein [Em]Licht auf meinem Weg.
     author: "VIBE",
     key: "F",
     bpm: 76,
-    theme: "Waiting / Trust",
+    theme: "Warten / Vertrauen",
+    language: "de-ch",
     youtube: "https://www.youtube.com/results?search_query=VIBE+Queue",
     chords: `[Verse 1]
 [F]Hinder dir [C]loufe ich nah
@@ -434,7 +450,8 @@ dein [C]Wort ist ein [Em]Licht auf meinem Weg.
     author: "A. Frey",
     key: "G",
     bpm: 92,
-    theme: "Holy Spirit / Revival",
+    theme: "Heiliger Geist / Erweckung",
+    language: "de",
     youtube: "https://www.youtube.com/results?search_query=A.+Frey+Str%C3%B6me+lebendigen+Wassers",
     chords: `[Verse 1]
 [G]Komm, Heiliger [C]Geist, wie ein [G]Strömender Regen
@@ -460,7 +477,8 @@ dein [C]Wort ist ein [Em]Licht auf meinem Weg.
     author: "Eden Music",
     key: "D",
     bpm: 115,
-    theme: "Joy / Praise",
+    theme: "Freude / Lobpreis",
+    language: "de-ch",
     youtube: "https://www.youtube.com/results?search_query=Eden+Music+%C3%BCsi+fr%C3%B6id",
     chords: `[Verse 1]
 [D]Üsi Fröid chunt [G]vo dir, Herr
@@ -486,7 +504,8 @@ dein [C]Wort ist ein [Em]Licht auf meinem Weg.
     author: "Christa Bucherer",
     key: "E",
     bpm: 74,
-    theme: "Surrender / Service",
+    theme: "Hingabe / Dienst",
+    language: "en",
     youtube: "https://www.youtube.com/results?search_query=Christa+Bucherer+Vessel",
     chords: `[Verse 1]
 [E]Take my life, a [A]vessel in Your hand
@@ -512,7 +531,8 @@ dein [C]Wort ist ein [Em]Licht auf meinem Weg.
     author: "Columbus",
     key: "G",
     bpm: 70,
-    theme: "Worship / Worthiness",
+    theme: "Anbetung / Würdigkeit",
+    language: "de-ch",
     youtube: "https://www.youtube.com/results?search_query=Columbus+W%C3%BCrdig+bisch+nur+du",
     chords: `[Verse 1]
 [G]Würdig bisch [C]nur du, oh [D]Herr
@@ -539,6 +559,7 @@ dein [C]Wort ist ein [Em]Licht auf meinem Weg.
     key: "G",
     bpm: 76,
     theme: "Worship / Praise",
+    language: "de-ch",
     youtube: "https://www.youtube.com/results?search_query=Elevation+Worship+Yahweh",
     chords: `[Verse 1]
 [G]Heilig, heilig [C]bisch du Herr
@@ -558,7 +579,8 @@ dein [C]Wort ist ein [Em]Licht auf meinem Weg.
     author: "Kathryn Scott / Vineyard",
     key: "C",
     bpm: 70,
-    theme: "Intimacy / Desperation",
+    theme: "Intimität / Sehnsucht",
+    language: "en",
     youtube: "https://www.youtube.com/results?search_query=Kathryn+Scott+Hungry+Vineyard",
     chords: `[Verse 1]
 [C]Hungry, I [Am7]come to You
@@ -581,7 +603,8 @@ To [C]fill me`
     author: "Brenton Brown / Vineyard",
     key: "G",
     bpm: 98,
-    theme: "Joyful Praise",
+    theme: "Freudiger Lobpreis",
+    language: "en",
     youtube: "https://www.youtube.com/results?search_query=Brenton+Brown+Your+Love+Is+Amazing",
     chords: `[Verse 1]
 [G]Your love is a[C]mazing, steady and [D]strong
@@ -602,6 +625,7 @@ To [C]fill me`
     key: "D",
     bpm: 72,
     theme: "Intimacy / Worship",
+    language: "de-ch",
     youtube: "https://www.youtube.com/results?search_query=Hie+singt+es+H%C3%A4rz",
     chords: `[Verse 1]
 [D]Hie vor dir, [A]in dr Stilli
@@ -621,7 +645,8 @@ To [C]fill me`
     author: "Swiss Worship (Mock)",
     key: "E",
     bpm: 78,
-    theme: "Worship / Majesty",
+    theme: "Anbetung / Majestät",
+    language: "de-ch",
     youtube: "https://www.youtube.com/results?search_query=Du+allei+bisch+Gott",
     chords: `[Verse 1]
 [E]Dini Macht isch [A]unendlich, Herr
@@ -641,7 +666,8 @@ To [C]fill me`
     author: "Brenton Brown",
     key: "B",
     bpm: 110,
-    theme: "Upbeat Praise / Strength",
+    theme: "Upbeat Lobpreis / Kraft",
+    language: "en",
     youtube: "https://www.youtube.com/results?search_query=Brenton+Brown+Everlasting+God",
     chords: `[Verse 1]
 [B]Strength will rise as we [B]wait upon the [E]Lord
@@ -667,7 +693,8 @@ You lift us up on [E]wings like eagles`
     author: "Vineyard Bern (Mock)",
     key: "G",
     bpm: 68,
-    theme: "Lord's Prayer / Worship",
+    theme: "Vaterunser / Anbetung",
+    language: "de-ch",
     youtube: "https://www.youtube.com/results?search_query=%C3%DCse+Vater+worship",
     chords: `[Verse 1]
 [G]Üse Vater [C]im Himmel,
@@ -688,6 +715,7 @@ You lift us up on [E]wings like eagles`
     key: "D",
     bpm: 70,
     theme: "Intimacy / Adoration",
+    language: "de-ch",
     youtube: "https://www.youtube.com/results?search_query=By+dyne+F%C3%BCess",
     chords: `[Verse 1]
 [D]Hie sitze i [A]by dyne Füess
@@ -707,7 +735,8 @@ You lift us up on [E]wings like eagles`
     author: "Phil Wickham (Mock)",
     key: "C",
     bpm: 85,
-    theme: "Declaration of Faith",
+    theme: "Glaubensbekenntnis",
+    language: "en",
     youtube: "https://www.youtube.com/results?search_query=Phil+Wickham+I+Believe",
     chords: `[Verse 1]
 [C]I believe in God the [F]Father
@@ -727,7 +756,8 @@ You lift us up on [E]wings like eagles`
     author: "German Worship (Mock)",
     key: "G",
     bpm: 72,
-    theme: "Trust / Promises",
+    theme: "Vertrauen / Verheissungen",
+    language: "de-ch",
     youtube: "https://www.youtube.com/results?search_query=Du+hesch+verheisse+Herr",
     chords: `[Verse 1]
 [G]Du hesch verheisse, [C]Herr, dass du bi uns [G]bisch
