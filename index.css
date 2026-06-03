@@ -1815,6 +1815,59 @@ button, input, select {
     width: 2.4rem;
     height: 2.4rem;
   }
+
+  /* Responsive header adjustments for tablet/mobile screens */
+  .app-header {
+    margin-bottom: 1.75rem;
+    gap: 1rem;
+  }
+  
+  .header-left {
+    width: 100%;
+  }
+
+  .header-left > div:first-child {
+    align-items: flex-start !important; /* Align logo to the top on mobile */
+  }
+
+  .header-title {
+    font-size: 1.8rem !important; /* Scale down title size */
+    flex-wrap: wrap; /* Allow "Songpool" to wrap under "Worship Community" if needed */
+    gap: 0.4rem 0.6rem !important;
+    line-height: 1.25;
+  }
+  
+  .header-subtitle {
+    font-size: 0.85rem !important;
+    margin-top: 0.5rem;
+  }
+  
+  .church-logo-container {
+    width: 2.75rem; /* Slightly smaller logo in header on mobile */
+    height: 2.75rem;
+  }
+  
+  .logo-placeholder {
+    font-size: 1.15rem;
+  }
+}
+
+/* Extra small mobile adjustments */
+@media (max-width: 480px) {
+  .header-title {
+    font-size: 1.45rem !important; /* Even smaller for very narrow viewports */
+  }
+  
+  .header-tagline {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+  }
+  
+  /* Make Setlist toggle and logout button stretch or align nicely on mobile */
+  .app-header > div:last-child {
+    width: 100%;
+    justify-content: space-between;
+  }
 }
 
 /* ==========================================================================
