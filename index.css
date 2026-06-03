@@ -1854,8 +1854,30 @@ button, input, select {
 
 /* Extra small mobile adjustments */
 @media (max-width: 480px) {
+  .header-left > div:first-child {
+    flex-direction: column !important; /* Stack logo on top, texts below */
+    align-items: flex-start !important; /* Align logo and texts to the left edge */
+    gap: 0.5rem !important;
+  }
+
+  .church-logo-container {
+    width: 2.2rem !important; /* Smaller logo in header on mobile */
+    height: 2.2rem !important;
+    margin-bottom: 0.25rem;
+  }
+
+  .logo-placeholder {
+    font-size: 1rem !important;
+  }
+
   .header-title {
-    font-size: 1.45rem !important; /* Even smaller for very narrow viewports */
+    font-size: 1.45rem !important; /* Clean font size for title */
+    display: block !important; /* Block layout so elements flow naturally */
+    line-height: 1.2;
+  }
+  
+  .header-title span {
+    display: inline-block; /* Keep inline-block next to main text if it fits, or wrap */
   }
   
   .header-tagline {
@@ -1863,10 +1885,39 @@ button, input, select {
     letter-spacing: 0.12em;
   }
   
-  /* Make Setlist toggle and logout button stretch or align nicely on mobile */
+  /* Center the actions in the middle of the screen and bring them close together */
   .app-header > div:last-child {
     width: 100%;
-    justify-content: space-between;
+    justify-content: center !important; /* Center the buttons together */
+    gap: 0.5rem !important; /* Closer spacing */
+  }
+
+  /* Reduce the size of the Sonntags-Setlist button */
+  .btn-setlist-toggle {
+    padding: 0.5rem 0.85rem !important; /* Reduced padding */
+    font-size: 0.8rem !important; /* Smaller text size */
+    gap: 0.4rem !important;
+    border-radius: 0.5rem !important;
+  }
+
+  .btn-setlist-toggle .count-badge {
+    padding: 0.1rem 0.35rem !important;
+    font-size: 0.7rem !important;
+    min-width: 1.1rem !important;
+    height: 1.1rem !important;
+  }
+
+  /* Make logout button match the smaller setlist button size */
+  .btn-logout {
+    width: 2rem !important;
+    height: 2rem !important;
+    padding: 0 !important;
+    border-radius: 0.5rem !important;
+  }
+
+  .btn-logout svg {
+    width: 1.05rem !important;
+    height: 1.05rem !important;
   }
 }
 
