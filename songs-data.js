@@ -8,29 +8,75 @@ const SONGS = [
   {
     id: "chum-zu-mir",
     title: "Chum zu mir",
-    author: "VIBE",
+    author: "Damaris Baldinger, Stefan Röthlisberger, Christa Michelle Bucherer",
     key: "C",
-    bpm: 74,
+    bpm: 81,
+    timeSig: "4/4",
     theme: "Anbetung",
     language: "de-ch",
+    ccli: 7214213,
     youtube: "https://www.youtube.com/results?search_query=VIBE+Chum+zu+mir",
-    chords: `[Verse 1]
-[C]Chum zu mir, ich [G]wart uf di
-[Am]In däre Stilli, [F]wo du vor mir stoosch
-[C]Chum zu mir, ich [G]schenk dir Rueh
-[Am]Mini Liebi [F]schlofft nie ii
+    chords: `[Intro]
+[C] / / / | / / / / | / / / / | / / / /
+
+[Verse 1]
+[C]Umschlosse vo Dire Liebi
+[C/E]Behüetet dür Dini Hand
+[F]Wag’ i e nächste Schritt
+[Gsus4]Ine nöie Tag
+[C]Geborge i Dire Wermi
+[C/E]Umwicklet vo Dire Gnad
+[F]Schnuufen ig ii und uus
+[Gsus4]Gibe mi nid uuf
+
+[Pre-Chorus]
+[F](Da isch) ke Schleier meh zwüsche Dir u mir
+[G]Ke Vorhang wo üs trennt
+[C/E]Ke Fluech wo mi uf Abstand häbt
+[F]Ke Blick wo mi nid vertreit
+[F]Nume usgstreckti Arme
+[G]U ne Stimm wo zärtlich seit
 
 [Chorus]
-[C]Du bisch mini [G]Zueflucht, Herr
-[Am]Mini Stärki in dr [F]Nacht
-[C]Dini Liebi [G]trägt mi witter
-[Am]Bis dr neue [F]Morge erwacht
+[C]Chum zu mir
+[C/E]La di a mire Gnad la gnüege
+[F]Chum zu mir
+[Dm]I wott di [G]sterche und erfrüsche
+[C]Iss vo mir
+[C/E]I bi das Brot wo nie meh usgeit
+[F]Trink vo mir
+[G]Bis vou vo mir
+
+[Channel 1]
+[C] / / / | / / / /
 
 [Verse 2]
-[C]Dini Gnad isch [G]alles, was i bruch
-[Am]Sie treit mi durn [F]Schduri und dr Wind
-[C]Halt mi fescht, [G]lass mi nie los
-[Am]Ich wott ewig [F]din si`
+[C]Ergriffe vo Dire Güeti
+[C/E]Verwurzlet i Dine Wort
+[F]Mache i mi uuf für Di
+[Gsus4]Du bisch hie bi mir
+[C]Daheime i Dire Nechi
+[C/E]Verbunde mit Dire Chraft
+[F]Richt’i mi wider uuf
+[Gsus4]Läbe fliesst dür mi
+
+[Pre-Chorus]
+
+[Chorus (2x)]
+
+[Bridge]
+[F]Dä Momänt
+[C/E]Woni ändlech loslah
+[Dm]‘S nümm säuber [C]mache z’ga
+[Bb]Dir aues überlah
+[Bb]Jetz chunnt die beschti Zit
+[G]Wüu Du hesch übernoh
+
+[Chorus (2x)]
+
+[Channel 1]
+[C] / / / | [C/E] / / / | [F] / / / | [Dm] / [G] /
+[C] / / / | [C/E] / / / | [F] / / / | [G] / / / | [C] / / / /`
   },
   {
     id: "danke-fuer-dis-chruez",

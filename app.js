@@ -57,6 +57,7 @@ const modalCcliHash = document.getElementById('modalCcliHash');
 const modalAuthorDetail = document.getElementById('modalAuthorDetail');
 const linkYoutube = document.getElementById('linkYoutube');
 const linkSpotify = document.getElementById('linkSpotify');
+const btnDownloadPDF = document.getElementById('btnDownloadPDF');
 
 // --- Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
@@ -225,6 +226,11 @@ function setupEventListeners() {
 
   // Export clipboard action
   btnExportSetlist.addEventListener('click', exportSetlistToClipboard);
+
+  // Download PDF action
+  if (btnDownloadPDF) {
+    btnDownloadPDF.addEventListener('click', downloadPDF);
+  }
 
   // Handle print lifecycle to dynamically set document title (affects PDF filename)
   window.addEventListener('beforeprint', () => {
@@ -403,12 +409,12 @@ function openChordModal(songId) {
   modalMetronomeBpm.textContent = `${song.bpm} BPM`;
   modalAuthorDetail.textContent = song.author;
   
-  // Estimate time signature based on BPM
-  const timeSig = song.bpm > 90 ? "4/4" : (song.bpm > 75 ? "6/8" : "3/4");
+  // Use custom timeSig or estimate based on BPM
+  const timeSig = song.timeSig || (song.bpm > 90 ? "4/4" : (song.bpm > 75 ? "6/8" : "3/4"));
   modalTimeSig.textContent = `Taktart: ${timeSig}`;
 
-  // Generate dynamic CCLI song number hash
-  const songHash = song.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 1047190);
+  // Use custom CCLI or generate dynamic CCLI song number hash
+  const songHash = song.ccli || song.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 1047190);
   modalCcliHash.textContent = `CCLI: ${songHash}`;
 
   // Set Recording Links
@@ -559,8 +565,8 @@ function displayChordSheet() {
   let renderedLines = [];
 
   // 1. Generate Authentic SongSelect Header Block
-  const songHash = currentModalSong.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 1047190);
-  const timeSig = currentModalSong.bpm > 90 ? "4/4" : (currentModalSong.bpm > 75 ? "6/8" : "3/4");
+  const songHash = currentModalSong.ccli || currentModalSong.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 1047190);
+  const timeSig = currentModalSong.timeSig || (currentModalSong.bpm > 90 ? "4/4" : (currentModalSong.bpm > 75 ? "6/8" : "3/4"));
   
   const headerHtml = `
 <div class="ccli-header-block">
@@ -568,25 +574,25 @@ function displayChordSheet() {
     <div class="ccli-song-title">${currentModalSong.title}</div>
     <div class="ccli-song-meta">Von ${currentModalSong.author}</div>
     <div class="ccli-song-details-row">
-      <span>Tonart: <strong>${currentModalKey}</strong></span> • 
-      <span>Tempo: <strong>${currentModalSong.bpm} BPM</strong></span> • 
-      <span>Taktart: <strong>${timeSig}</strong></span>
+      <span>Tonart: <strong>${currentModalKey}</strong> | BPM: <strong>${currentModalSong.bpm}</strong> | Takt: <strong>${timeSig}</strong></span>
     </div>
-    <div class="ccli-copyright">© Vineyard Music Group • CCLI-Lizenz #12345 • Lied-Nr. ${songHash}</div>
   </div>
 </div>
 <hr class="ccli-divider">
 `;
   
-  renderedLines.push(headerHtml);
+  const headerPrintEl = document.getElementById('chordSheetHeaderPrint');
+  if (headerPrintEl) {
+    headerPrintEl.innerHTML = headerHtml;
+  }
 
   // Group each verse/chorus block in a .song-section div to prevent splitting across columns
   let activeSectionLines = [];
   let inSection = false;
 
   rawLines.forEach(line => {
-    // Check if line is a section header (e.g. [Verse 1], [Chorus])
-    const sectionHeaderMatch = line.match(/^\[(Verse \d+|Chorus|Pre-Chorus|Bridge|Intro|Outro)\]\s*$/i);
+    // Check if line is a section header (e.g. [Verse 1], [Chorus (2x)], [Channel 1])
+    const sectionHeaderMatch = line.match(/^\[(Verse \d+|Chorus|Pre-Chorus|Bridge|Intro|Outro|Channel \d+|Interlude)([^\]]*)\]\s*$/i);
     
     if (sectionHeaderMatch) {
       // Close previous section if exists
@@ -603,7 +609,8 @@ function displayChordSheet() {
         }
         activeSectionLines = [];
       }
-      activeSectionLines.push(`<section-header>${sectionHeaderMatch[1].toUpperCase()}</section-header>`);
+      const headerText = sectionHeaderMatch[1].toUpperCase() + (sectionHeaderMatch[2] ? sectionHeaderMatch[2].toUpperCase() : '');
+      activeSectionLines.push(`<section-header>${headerText}</section-header>`);
       inSection = true;
       return;
     }
@@ -680,6 +687,24 @@ function displayChordSheet() {
   }
 
   chordSheetPre.innerHTML = renderedLines.join('');
+  
+  // Sync the root-level print-only container to bypass WebKit columns page-break bugs
+  populatePrintArea();
+}
+
+function populatePrintArea() {
+  const printArea = document.getElementById('printArea');
+  const headerPrintEl = document.getElementById('chordSheetHeaderPrint');
+  if (!printArea || !headerPrintEl || !chordSheetPre) return;
+  
+  const headerHtml = headerPrintEl.innerHTML;
+  const chordsHtml = chordSheetPre.innerHTML;
+  const isTwoCol = chordSheetPre.classList.contains('print-two-columns');
+  
+  printArea.innerHTML = `
+    ${headerHtml}
+    <div class="chord-sheet-pre ${isTwoCol ? 'print-two-columns' : ''}">${chordsHtml}</div>
+  `;
 }
 
 function setChordNotation(notation) {
@@ -771,3 +796,22 @@ function shiftNote(note, shift, useFlats) {
   const scale = useFlats ? SCALE_FLATS : SCALE_SHARPS;
   return scale[newSemi];
 }
+
+// --- PDF Stampa using window.print() ---
+function downloadPDF() {
+  if (!currentModalSong) return;
+  
+  if (document.fonts) {
+    document.fonts.ready.then(() => {
+      window.print();
+    }).catch((err) => {
+      console.warn("Font loading failed, printing anyway:", err);
+      window.print();
+    });
+  } else {
+    window.print();
+  }
+}
+
+// Bind to window for backup inline triggers
+window.downloadPDF = downloadPDF;

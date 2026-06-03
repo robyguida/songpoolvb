@@ -1151,6 +1151,11 @@ button, input, select {
   -webkit-column-span: all;
 }
 
+.chord-sheet-header-print,
+.print-only {
+  display: none;
+}
+
 /* Printable Lyrics & Chords Display Area */
 .chord-sheet-pre {
   font-family: var(--font-mono) !important;
@@ -1447,7 +1452,7 @@ button, input, select {
 @media print {
   @page {
     size: A4 portrait;
-    margin: 10mm 12mm 10mm 12mm; /* Tight, beautiful 10mm top/bottom, 12mm left/right margins */
+    margin: 8mm 10mm 8mm 10mm; /* Optimised margins matching single-page layout */
   }
 
   html, body {
@@ -1456,111 +1461,77 @@ button, input, select {
     height: auto !important;
     min-height: 0 !important;
     overflow: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
   
-  .app-container {
-    display: block !important;
-    min-height: 0 !important;
-    height: auto !important;
-    position: static !important;
-  }
-  
-  .main-content,
-  .setlist-sidebar {
+  /* Hide the entire interactive application layout during printing */
+  body > *:not(.print-only) {
     display: none !important;
   }
   
-  .modal-overlay.open {
-    position: static !important;
+  /* Reveal the clean, flat root print-only block */
+  .print-only {
     display: block !important;
     width: 100% !important;
-    height: auto !important;
-    background: white !important;
-    color: black !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    padding: 0 !important;
     overflow: visible !important;
-  }
-  
-  .modal-container {
-    box-shadow: none !important;
-    border: none !important;
-    background: white !important;
-    color: black !important;
-    max-width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
-    width: 100% !important;
-    display: block !important;
-    transform: none !important;
-    overflow: visible !important;
-  }
-  
-  .modal-body {
-    display: block !important;
-    overflow: visible !important;
-  }
-  
-  .chord-sheet-section {
-    padding: 0 !important;
-    background: transparent !important;
-    border-right: none !important;
-    display: block !important;
-    overflow: visible !important;
-  }
-  
-  .modal-header-row,
-  .modal-media-row,
-  .team-alert-bar,
-  .modal-controls-sidebar,
-  .btn-modal-back {
-    display: none !important;
   }
   
   .ccli-header-block {
-    display: flex !important; /* Reveal CCLI block on printed PDF */
-    column-span: all !important;
-    -webkit-column-span: all !important;
-    margin-bottom: 0.25rem !important; /* Tightened printed header space */
+    display: flex !important;
+    margin-bottom: 0.15rem !important;
+  }
+  
+  .ccli-song-title {
+    font-size: 16pt !important;
+    font-weight: 800 !important;
+    color: #000000 !important;
+  }
+  
+  .ccli-song-meta {
+    font-size: 9.5pt !important;
+    color: #475569 !important;
   }
   
   .ccli-divider {
-    display: block !important; /* Reveal separator line on printed PDF */
-    margin-top: 0.25rem !important;
-    margin-bottom: 0.35rem !important; /* Tightened printed divider space */
+    display: block !important;
+    margin-top: 0.5rem !important; /* Increased space above the divider line */
+    margin-bottom: 1rem !important; /* Increased space below divider to separate song info and sheet music */
     border-top: 1.5px solid #000000 !important;
     opacity: 0.15 !important;
-    column-span: all !important;
-    -webkit-column-span: all !important;
   }
   
   .chord-sheet-pre {
     display: block !important;
     color: black !important;
-    font-size: 10pt !important; /* Fixed: 10pt print size ensures elements fit A4 page beautifully */
-    line-height: 1.52 !important; /* Fixed: 1.52 line-height keeps chords tight over lyrics without vertical bloat */
+    font-size: 8.5pt !important; /* Compact readable font size */
+    line-height: 1.35 !important; /* Tight line spacing prevents column overflow */
     font-family: var(--font-mono) !important;
-    white-space: normal !important; /* Fixed: normal white-space allows block-level columns to wrap */
+    white-space: normal !important;
     overflow: visible !important;
   }
   
   .chord-sheet-pre.print-two-columns {
     column-count: 2 !important;
-    column-gap: 3rem !important;
+    -webkit-column-count: 2 !important;
+    column-gap: 2rem !important;
+    -webkit-column-gap: 2rem !important; /* Tighter column gap prevents line wraps */
     column-rule: 1px dashed #cccccc !important;
+    -webkit-column-rule: 1px dashed #cccccc !important;
+    column-fill: balance !important;
+    -webkit-column-fill: balance !important;
   }
   
   .chord-token {
-    color: #000000 !important; /* Pure solid black print chords */
+    color: #000000 !important;
     font-weight: 700 !important;
     text-shadow: none !important;
   }
   
   .ccli-song-details-row {
-    font-size: 9.5pt !important;
+    font-size: 9pt !important;
     color: #475569 !important;
-    margin-top: 0.25rem !important;
+    margin-top: 0.15rem !important;
     font-weight: 600 !important;
   }
   
@@ -1572,17 +1543,23 @@ button, input, select {
   .chord-sheet-pre section-header {
     color: #000000 !important;
     border-left: 3px solid #000000 !important;
-    font-size: 10pt !important;
+    font-size: 9pt !important;
     font-weight: 700 !important;
-    margin-top: 0.3rem !important; /* Tightened printed section header space */
+    margin-top: 0.45rem !important; /* Increased space above section titles */
     margin-bottom: 0.15rem !important;
-    padding-left: 0.625rem !important;
+    padding-left: 0.5rem !important;
   }
   
   .song-section {
-    margin-bottom: 0.5rem !important; /* Tightened printed section spacing to prevent empty trailing pages */
-    width: auto !important; /* Fixed: auto width allows block-level columns to flex under column-count */
-    white-space: pre !important; /* Fixed: preserves pre-formatted chords-above-lyrics structure inside column blocks */
+    display: block !important;
+    width: 100% !important;
+    break-inside: avoid-column !important;
+    -webkit-column-break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    margin-bottom: 0.65rem !important; /* Increased space between song sections for clean visual breaks */
+    white-space: pre !important;
   }
 }
+
+
 

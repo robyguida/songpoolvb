@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Worship Community Songpool</title>
   <meta name="description" content="A sleek, modern songpool directory and setlist builder for your worship community. Access chord sheets, play recordings, and transpose keys instantly.">
-  
+  <!-- Preconnect and Load Google Fonts early for accurate html2pdf canvas rendering -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
   <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="index.css">
 </head>
@@ -185,6 +189,7 @@
 
 
             <!-- Monospaced Chords Content -->
+            <div class="chord-sheet-header-print" id="chordSheetHeaderPrint"></div>
             <div class="chord-sheet-pre" id="chordSheetPre">Akkordblatt wird geladen...</div>
           </section>
           
@@ -272,7 +277,7 @@
 
             <!-- Download PDF Action -->
             <div class="control-group" style="margin-top: auto;">
-              <button class="btn-pdf-download" onclick="window.print()" id="btnDownloadPDF">
+              <button class="btn-pdf-download" id="btnDownloadPDF">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width: 1.1rem; height: 1.1rem; flex-shrink: 0;">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                 </svg>
@@ -288,6 +293,9 @@
 
   </div>
 
+  <!-- Dedicated print-only container to bypass CSS columns page-break bugs -->
+  <div id="printArea" class="print-only"></div>
+ 
   <!-- Database & Scripts Integration -->
   <script src="songs-data.js"></script>
   <script src="app.js"></script>
