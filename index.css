@@ -1646,6 +1646,53 @@ button, input, select {
   border-color: rgba(239, 68, 68, 0.2) !important;
 }
 
+/* Responsive adjustments for mobile/iPhone screen widths */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 2.25rem 1.5rem 2rem; /* Reduce padding inside the login card */
+    border-radius: 1.25rem;
+    width: calc(100% - 2.5rem); /* Keeps a nice margin on each side of the screen */
+    max-width: 330px;
+    box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.4);
+  }
+  
+  .login-logo-container {
+    width: 4.5rem; /* Slightly smaller logo on mobile */
+    height: 4.5rem;
+    padding: 0.6rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .login-tagline {
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+  }
+  
+  .login-title {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .login-title span {
+    font-size: 1.35rem;
+  }
+  
+  .login-subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .login-overlay input[type="password"] {
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+  }
+  
+  .btn-login {
+    padding: 0.8rem;
+    font-size: 0.95rem;
+  }
+}
+
 /* ==========================================================================
    PRINTING ENGINE OVERRIDE (@media print)
    ========================================================================== */

@@ -1152,11 +1152,18 @@ window.downloadPDF = downloadPDF;
 function checkAuthenticationState() {
   const isAuth = localStorage.getItem('songpool_authenticated') === 'true';
   const overlay = document.getElementById('loginOverlay');
+  const appContainer = document.querySelector('.app-container');
   if (overlay) {
     if (isAuth) {
       overlay.classList.add('hidden');
+      if (appContainer) {
+        appContainer.style.display = '';
+      }
     } else {
       overlay.classList.remove('hidden');
+      if (appContainer) {
+        appContainer.style.display = 'none';
+      }
       const pwdInput = document.getElementById('passwordInput');
       if (pwdInput) {
         pwdInput.focus();
@@ -1170,11 +1177,15 @@ function handleLoginSubmit(event) {
   const passwordInput = document.getElementById('passwordInput');
   const errorMsg = document.getElementById('loginError');
   const overlay = document.getElementById('loginOverlay');
+  const appContainer = document.querySelector('.app-container');
 
   if (passwordInput && passwordInput.value === SHARED_PASSWORD) {
     localStorage.setItem('songpool_authenticated', 'true');
     if (overlay) {
       overlay.classList.add('hidden');
+    }
+    if (appContainer) {
+      appContainer.style.display = '';
     }
     if (errorMsg) {
       errorMsg.style.display = 'none';
