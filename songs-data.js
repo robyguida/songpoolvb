@@ -81,54 +81,93 @@ const SONGS = [
   {
     id: "danke-fuer-dis-chruez",
     title: "Danke für dis Chrüz",
-    author: "Conny Guida",
-    key: "G",
-    bpm: 68,
-    theme: "Lobpreis / Dankbarkeit",
+    author: "Cornelia Guida",
+    key: "E",
+    bpm: 90,
+    timeSig: "12/8",
+    theme: "Dankbarkeit / Kreuz",
     language: "de-ch",
-    youtube: "https://www.youtube.com/results?search_query=Conny+Guida+Danke+f%C3%BCr+dis+Chr%C3%BCz",
-    chords: `[Verse 1]
-[G]Danke für dis [D]Chrüz, oh Herr
-[Em]Danke für dr [C]Priis, wo du bezahlt hesch
-[G]Dini Gnad isch [D]grösser als mini [Em]Sünd [C]
+    youtube: "https://www.youtube.com/results?search_query=Cornelia+Guida+Danke+f%C3%BCr+dis+Chr%C3%BCz",
+    chords: `[Intro]
+[E] / / / | / / [B/D#] / | [C#m7] / / / | / / [E/B] /
+[A] / [B/A] / | [A] / [B/A] / | [E] / / / | [A/E] / [E] /
 
-[Chorus]
-[G]Du bisch heilig, [D]heilig, Herr
-[Em]Dank dir dörf ich [C]vor dir stoh
-[G]Danke Jesus [D]für dis Opfer
-[Em]Du hesch mi er[C]löst
+[Verse 1]
+Es git nur [E]ei Ort, wo [E/D#]wahri Freiheit isch
+Es git nur [C#m7]ei Wäg, wo d’[E/B]Schuld für geng besiegt
+Das isch [A]Jesus Christus, [B/A]Sohn vo Gott
+wo [A]gstorbe isch [B/A]am [E]Chrüz uf Golgatha [A/E] [E]
 
 [Verse 2]
-[G]Du hesch dr Vorhang [D]ufgerisse
-[Em]Dr Wäg isch [C]frei zum Vatergott
-[G]Halleluja, [D]dein Name sig ge[Em]lobt [C]`
+Es git nur [E]ei Plan, für d’[B/D#]Rettig vo dr Wäut
+Es git nur [C#m7]eis Ziel, wo [E/B]füehrt id Ewigkeit
+Das isch [A]Jesus Christus, [B/A]Sohn vo Gott
+Wo [A]gstorbe isch [B/A]am [E]Chrüz uf Golgatha [A/E] [E]
+Das isch [A]Jesus Christus, [B/A]Sohn vo Gott
+wo [A]gstorbe isch [B/A]am [E]Chrüz uf Golgatha [Bsus4] [B]
+
+[Chorus]
+Danke für dis [E]Chrüz
+[B/D#]Was du für üs hesch [C#m7]ta
+Danke für dis [A]Chrüz
+[Bsus4]Hesch dis Läbe für [B]üs glah
+Danke für di [E]Liib
+[B/D#]Wo broche hesch [C#m7]für üs
+Danke für dis [A]Bluet
+[Bsus4]Wo du vergosse hesch [B]für üs
+
+[Interlude]
+[E] / [B/D#] / | [C#m7] / / /
+[A] / / / | [Bsus4] / [B] /
+(Danke für dis Chrüz)
+[E] / [B/D#] / | [C#m7] / / /
+[A] / / / | [Bsus4] / [B] /
+
+[Instrumental]
+[A] / / [B/D#] | [C#m7] / / /
+[B/D#] / / / | [Esus4] / [E] /
+
+[Bridge]
+[A]Halleluja du [B]hesch dr [C#m7]Sieg
+dert am [B/D#]Chrüz, dür di Tod und dis [Esus4]ufer[E]stah
+[A]Halleluja, [B]mir si [C#m7]befreit
+Dert am [B/D#]Chrüz, hesch du au üsi Schuld [Esus4]ert[E]reit`
   },
   {
-    id: "der-sunne-entgaege",
-    title: "Der Sunne entgäge",
-    author: "AUDIEL",
-    key: "E",
-    bpm: 80,
-    theme: "Freude / Weg mit Gott",
+    id: "dr-sunne-entgaege",
+    title: "Dr Sunne entgäge",
+    author: "Joël Ung",
+    key: "C#",
+    bpm: 74,
+    timeSig: "4/4",
+    theme: "Lobpreis / Vertrauen",
     language: "de-ch",
-    youtube: "https://www.youtube.com/results?search_query=AUDIEL+Der+Sunne+entg%C3%A4ge",
+    youtube: "https://www.youtube.com/results?search_query=Jo%C3%ABl+Ung+Dr+Sunne+entg%C3%A4ge",
     chords: `[Verse 1]
-[E]Ich loufe der [B]Sunne entgäge
-[C#m]Dini Liebi wärmt mis [A]Härz
-[E]Jede Schritt mit [B]dir zäme
-[C#m]Vertriibt dr ganze [A]Schmärz
+Für geng [F#]bisch Du bi mir
+Was wett i [G#]ohni Di
+Für geng [F#]bisch Du bi mir
+Was wett i [G#]ohni Di
+
+[Pre-Chorus]
+Du setzisch d’[A#m]Sägu [G#/C]wider [F#]nöi
+Für di Fahrt [A#m]dr [G#/C]Sunne [F#]entgäge
+into Chorus: [C#] (statt [F#])
 
 [Chorus]
-[E]Du bisch mis Liecht, mi [B]Wäg
-[C#m]Du bringsch dr neu [A]Tag
-[E]Mit dir hani [B]keini Angst meh
-[C#m]Was dr Morge o [A]bringä mag
+Du [C#]treisch mi und [G#]nimmsch mi i Di [F#]Arm
+[C#]Zrügg i die [G#]Freiheit, wo Di [F#]Friede wohnt
+Du [C#]zeigsch mir und [G#]nimmsch mi a Dir [F#]Hand
+[C#]Zrügg a dä [G#]Ort, wo di [F#]Liebi wachst
+into Bridge: [C#]
 
-[Verse 2]
-[E]I dr Dunkelheit [B]vom Läbe
-[C#m]Bisch du dr Fixstärn, [A]wo mir lücht't
-[E]Dini Tröii isch [B]unerschütterlich
-[C#m]Bis dr Schatte [A]wicht`
+[Bridge]
+[A#m]Niemer und [Fm]Nüt cha [F#]mi je trenne
+[C#]Vo Dire [G#]Liebi, [C#]grosse Gott
+Da, wo [A#m]Di Geischt [Fm]würkt, [F#]isch die Freiheit
+A [C#]däm Ort [G#]wott i [C#]blibe und nie meh ga
+U ou [A#m]wenn ig [Fm]einisch [F#]sött vergässe
+Mis Härz tuet [C#]das nie, mis Härz tuet [G#]das nie`
   },
   {
     id: "du-bisch-mi-gott",
@@ -755,25 +794,51 @@ You lift us up on [E]wings like eagles`
 [Em]A[D]men`
   },
   {
-    id: "by-dyne-fueess",
-    title: "By dyne Füess",
-    author: "Swiss Worship (Mock)",
-    key: "D",
-    bpm: 70,
-    theme: "Intimacy / Adoration",
+    id: "bi-dyne-fueess",
+    title: "Bi dyne Füess",
+    author: "Maria Fiechter",
+    key: "E",
+    bpm: 65,
+    timeSig: "4/4",
+    theme: "Hingabe / Intimität",
     language: "de-ch",
-    youtube: "https://www.youtube.com/results?search_query=By+dyne+F%C3%BCess",
-    chords: `[Verse 1]
-[D]Hie sitze i [A]by dyne Füess
-[Bm]Gspüre dini [G]Gnad, so süess
-[D]Alli Sorge [A]la i hinder [Bm]mir [G]
-[Em]Hie bin i [A]ganz bi dir
+    youtube: "https://www.youtube.com/watch?v=u2Gn52sjyjk&t=135s",
+    chords: `[Intro]
+[E] / / / | [A] / / / | [E] / / / | [A] / / /
+
+[Verse]
+[E]Vater i bi so gärn dys [A]Chind
+[E] es git nüt woni lieber wär[A]
+[E]Vater, i liebes bi dir z\`[A]sy
+[E] da vergissi aus um [A]mi
+
+[Instrumental]
+[E] / / / | [A] / / / | [E] / / / | [A] / / /
+
+[Pre-Chorus]
+[F#m]Niene süsch [A]wott i sy
+[C#m]myni Fröid isch wäge dir[H]
+[F#m]niene süsch [A]wott i sy
+aus bi [H]dir
 
 [Chorus]
-[D]By dyne Füess, [A]hie isch mini [Bm]Rueh [G]
-[D]Dini Gägewart [A]deckt mi [Bm]zue [G]
-[Bm]Mis Härz loost [A]uf dis lyyse [G]Wort
-[Em]Hie an däm [A]heilige Ort`
+Da fliesst [A]Öl über mi
+dys [H]Agsicht darf i gseh
+bi [E/G#]dir herrscht ke Mangel
+dr [C#m]Bächer isch voll für mi
+
+[Chorus]
+
+[Bridge]
+Bi dyne [A]Füess Jesus isch my Lieblings[H]platz
+i liebe nüt meh [E/G#]als dyni Gägewart[A]
+bi dyne [A]Füess Jesus füehl i mi so [H]gliebt
+es isch dr Ort woni wott sy[E/G#]
+jede [C#m]Tag u j[H]edi Nacht[A]
+
+[Tag]
+Jede [A]Tag u j[E/G#]edi Nacht[H]
+jede [C#m]Tag u j[H]edi Nacht[A]`
   },
   {
     id: "i-believe",
@@ -785,16 +850,16 @@ You lift us up on [E]wings like eagles`
     language: "en",
     youtube: "https://www.youtube.com/results?search_query=Phil+Wickham+I+Believe",
     chords: `[Verse 1]
-[C]I believe in God the [F]Father
-[Am]I believe in Christ the [G]Son
-[C]I believe in the Holy [F]Spirit
+[C]I believe in God the[F]Father
+[Am]I believe in Christ the[G]Son
+[C]I believe in the Holy[F]Spirit
 [Am]Three in One, [G]Three in One
 
 [Chorus]
 [C]I believe, [F]I believe
-[Am]In the power of Your [G]name
+[Am]In the power of Your[G]name
 [C]I believe, [F]I believe
-[Am]You are risen from [G]the grave`
+[Am]You are risen from[G]the grave`
   },
   {
     id: "du-hesch-verheisse-herr",
@@ -806,16 +871,16 @@ You lift us up on [E]wings like eagles`
     language: "de-ch",
     youtube: "https://www.youtube.com/results?search_query=Du+hesch+verheisse+Herr",
     chords: `[Verse 1]
-[G]Du hesch verheisse, [C]Herr, dass du bi uns [G]bisch
-[Em]Dass dine Segen [Am]nie und nimmer [D]bricht
-[G]Mir stöh auf [C]dine Verheiss[G]ige fest
-[Em]Du bisch dr [D]Fels, wo uns nie [G]verlässt
+[G]Du hesch verheisse, [C]Herr, dass du bi uns[G]bisch
+[Em]Dass dine Segen[Am]nie und nimmer[D]bricht
+[G]Mir stöh auf[C]dine Verheiss[G]ige fest
+[Em]Du bisch dr[D]Fels, wo uns nie[G]verlässt
 
 [Chorus]
-[C]Mir beuge uns [G]vor dir, oh Fels vo dr [D]Ewigkeit
-[Em]Dini Tröii [C]währt bis in d'Un[D]endlichkeit
-[C]Du hesch verheisse, [G]und du blibsch [D]treu
-[C]Erfülle uns [D]jetzt ganz [G]neu`
+[C]Mir beuge uns[G]vor dir, oh Fels vo dr[D]Ewigkeit
+[Em]Dini Tröii[C]währt bis in d'Un[D]endlichkeit
+[C]Du hesch verheisse, [G]und du blibsch[D]treu
+[C]Erfülle uns[D]jetzt ganz[G]neu`
   }
 ];
 

@@ -1189,21 +1189,37 @@ button, input, select {
   display: inline;
 }
 
+.chord-line {
+  display: block;
+  line-height: 1.0;
+  margin-top: 0.75rem; /* Space from the lyric line above */
+  margin-bottom: 0.18rem; /* Move chords closer to the lyric line below */
+}
+
+.lyric-line {
+  display: block;
+  line-height: 1.25;
+}
+
 /* Song Section Headers */
 .chord-sheet-pre section-header {
   font-family: var(--font-sans);
-  color: #0f172a;
-  font-size: 0.75rem;
+  color: #000000;
+  font-size: 0.85rem; /* Slightly larger font */
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  display: inline-block;
-  margin-top: 0.75rem;
-  margin-bottom: 0.6rem;
-  border-left: 3px solid var(--accent-indigo);
-  background: rgba(190, 18, 60, 0.03);
-  padding: 0.15rem 0.625rem;
-  line-height: 1.2;
+  display: inline-block; /* Prevent double line breaks under pre-wrap */
+  margin-top: 1.2rem; /* Further away from the text above */
+  margin-bottom: 0.12rem; /* Reduced space below the header */
+}
+
+/* Remove extra margin-top when a line immediately follows a section-header */
+section-header + .chord-line {
+  margin-top: 0 !important;
+}
+section-header + .lyric-line {
+  margin-top: 0 !important;
 }
 
 /* ==========================================================================
@@ -2034,12 +2050,12 @@ button, input, select {
   
   .chord-sheet-pre section-header {
     color: #000000 !important;
-    border-left: 3px solid #000000 !important;
-    font-size: 9pt !important;
+    font-size: 9.5pt !important;
     font-weight: 700 !important;
-    margin-top: 0.45rem !important; /* Increased space above section titles */
-    margin-bottom: 0.15rem !important;
-    padding-left: 0.5rem !important;
+    margin-top: 0.8rem !important; /* Increased space above section titles */
+    margin-bottom: 0.2rem !important;
+    border-left: none !important;
+    padding-left: 0 !important;
   }
   
   .song-section {

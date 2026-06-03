@@ -598,7 +598,7 @@ function displayChordSheet() {
 
   rawLines.forEach(line => {
     // Check if line is a section header (e.g. [Verse 1], [Chorus (2x)], [Channel 1])
-    const sectionHeaderMatch = line.match(/^\[(Verse \d+|Chorus|Pre-Chorus|Bridge|Intro|Outro|Channel \d+|Interlude)([^\]]*)\]\s*$/i);
+    const sectionHeaderMatch = line.match(/^\[(Verse\s*\d*|Chorus|Pre-Chorus|Bridge|Intro|Outro|Channel\s*\d*|Interlude|Tag|Instrumental)([^\]]*)\]\s*$/i);
     
     if (sectionHeaderMatch) {
       // Close previous section if exists
@@ -611,7 +611,7 @@ function displayChordSheet() {
           activeSectionLines.pop();
         }
         if (activeSectionLines.length > 0) {
-          renderedLines.push(`<div class="song-section">${activeSectionLines.join('\n')}</div>`);
+          renderedLines.push(`<div class="song-section">${activeSectionLines.join('')}</div>`);
         }
         activeSectionLines = [];
       }
@@ -626,10 +626,11 @@ function displayChordSheet() {
     const hasChords = line.match(chordRegex);
 
     if (!hasChords) {
+      const wrapped = line.trim() === '' ? line : `<span class="lyric-line">${line}</span>`;
       if (inSection) {
-        activeSectionLines.push(line);
+        activeSectionLines.push(wrapped);
       } else {
-        renderedLines.push(line);
+        renderedLines.push(wrapped);
       }
       return;
     }
@@ -646,10 +647,11 @@ function displayChordSheet() {
         }
         return `<span class="chord-token">${transposedChord}</span>`;
       });
+      const wrapped = `<span class="chord-line">${renderedLine}</span>`;
       if (inSection) {
-        activeSectionLines.push(renderedLine);
+        activeSectionLines.push(wrapped);
       } else {
-        renderedLines.push(renderedLine);
+        renderedLines.push(wrapped);
       }
       return;
     }
@@ -699,17 +701,17 @@ function displayChordSheet() {
     }
 
     if (inSection) {
-      activeSectionLines.push(chordsLineHtml);
-      activeSectionLines.push(lyricsLine);
+      activeSectionLines.push(`<span class="chord-line">${chordsLineHtml}</span>`);
+      activeSectionLines.push(`<span class="lyric-line">${lyricsLine}</span>`);
     } else {
-      renderedLines.push(chordsLineHtml);
-      renderedLines.push(lyricsLine);
+      renderedLines.push(`<span class="chord-line">${chordsLineHtml}</span>`);
+      renderedLines.push(`<span class="lyric-line">${lyricsLine}</span>`);
     }
   });
 
   // Close final section
   if (inSection && activeSectionLines.length > 0) {
-    renderedLines.push(`<div class="song-section">${activeSectionLines.join('\n')}</div>`);
+    renderedLines.push(`<div class="song-section">${activeSectionLines.join('')}</div>`);
   }
 
   chordSheetPre.innerHTML = renderedLines.join('');
@@ -867,7 +869,7 @@ function getTransposedSongLines() {
 
   rawLines.forEach(line => {
     // Check if section header
-    const sectionHeaderMatch = line.match(/^\[(Verse \d+|Chorus|Pre-Chorus|Bridge|Intro|Outro|Channel \d+|Interlude)([^\]]*)\]\s*$/i);
+    const sectionHeaderMatch = line.match(/^\[(Verse\s*\d*|Chorus|Pre-Chorus|Bridge|Intro|Outro|Channel\s*\d*|Interlude|Tag|Instrumental)([^\]]*)\]\s*$/i);
     if (sectionHeaderMatch) {
       const headerText = sectionHeaderMatch[1].toUpperCase() + (sectionHeaderMatch[2] ? sectionHeaderMatch[2].toUpperCase() : '');
       lines.push({ type: 'section-header', text: headerText });
@@ -950,7 +952,7 @@ function drawPDFLine(doc, line, x, y, fontRegular, fontBold) {
   if (line.type === 'section-header') {
     doc.setFont(fontBold, 'bold');
     doc.setFontSize(8.5);
-    doc.setTextColor(110, 110, 110);
+    doc.setTextColor(0, 0, 0); // Bold, Black, Uppercase
     doc.text(line.text, x, y);
     return y + 4.5;
   } else if (line.type === 'chords') {
