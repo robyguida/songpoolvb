@@ -1471,29 +1471,6 @@ button, input, select {
   pointer-events: none;
 }
 
-/* Elegant light blue LED strip around the browser window edges on the login screen (glow only, no hard borders) */
-.login-overlay::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  z-index: 100000;
-  box-shadow: inset 0 0 45px rgba(56, 189, 248, 0.22); /* Thicker balanced light blue */
-  animation: led-border-pulse 3.5s infinite ease-in-out; /* Slower 3.5s pulse */
-}
-
-@keyframes led-border-pulse {
-  0%, 100% {
-    box-shadow: inset 0 0 30px rgba(56, 189, 248, 0.15);
-  }
-  50% {
-    box-shadow: inset 0 0 75px rgba(56, 189, 248, 0.45); /* Thicker soft blue glow */
-  }
-}
-
 .login-card {
   background: rgba(24, 24, 27, 0.65);
   backdrop-filter: blur(16px);
@@ -1507,6 +1484,20 @@ button, input, select {
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   transform: translateY(0);
   transition: transform 0.4s ease;
+  animation: card-glow-pulse 4.5s infinite ease-in-out; /* Slower 4.5s pulse around the card */
+}
+
+@keyframes card-glow-pulse {
+  0%, 100% {
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 
+                0 0 0 0 rgba(56, 189, 248, 0);
+  }
+  50% {
+    border-color: rgba(56, 189, 248, 0.25); /* Soft light blue border */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 
+                0 0 20px 2px rgba(56, 189, 248, 0.22); /* Less thick light blue glow */
+  }
 }
 
 .login-overlay.hidden .login-card {
@@ -1690,6 +1681,139 @@ button, input, select {
   .btn-login {
     padding: 0.8rem;
     font-size: 0.95rem;
+  }
+}
+
+/* Responsive song list table for mobile/tablet screens */
+@media (max-width: 768px) {
+  .table-header {
+    display: none !important; /* Hide desktop column headers */
+  }
+  
+  .songs-table-container {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    overflow-x: visible !important; /* Disable horizontal scrollbar */
+  }
+  
+  .songs-list-rows {
+    min-width: 0 !important; /* Remove desktop width constraints */
+    gap: 0.75rem;
+  }
+  
+  .song-row {
+    display: grid !important;
+    grid-template-columns: auto auto auto 1fr auto;
+    grid-template-rows: auto auto auto;
+    gap: 0.4rem 0.75rem;
+    align-items: center;
+    padding: 1.1rem 1.25rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 0.85rem;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 0.75rem;
+    min-width: 0 !important;
+    transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+  
+  .song-row:hover {
+    background: var(--bg-card) !important;
+    border-color: var(--accent-indigo) !important;
+    box-shadow: var(--shadow-md) !important;
+    transform: translateY(-1px);
+  }
+  
+  /* Row 1: Title block */
+  .song-row .col-title-block {
+    grid-column: 1 / 5;
+    grid-row: 1;
+    width: 100%;
+    padding-right: 0;
+  }
+  
+  /* Row 2: Author */
+  .song-row .col-author {
+    grid-column: 1 / 5;
+    grid-row: 2;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    padding-left: 2.7rem; /* Align perfectly under title text (skipping play button) */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Row 3: Meta elements (Key, BPM, Theme) */
+  .song-row .col-key {
+    grid-column: 1;
+    grid-row: 3;
+    padding-left: 2.7rem; /* Align under author and title text */
+    width: auto !important;
+  }
+  
+  .song-row .col-bpm {
+    grid-column: 2;
+    grid-row: 3;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    width: auto !important;
+  }
+  
+  .song-row .col-bpm::before {
+    content: "•";
+    margin-right: 0.5rem;
+    color: var(--text-muted);
+  }
+  
+  .song-row .col-bpm::after {
+    content: " BPM";
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+  
+  .song-row .col-theme {
+    grid-column: 3 / 5;
+    grid-row: 3;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: auto !important;
+  }
+  
+  .song-row .col-theme::before {
+    content: "•";
+    margin-right: 0.5rem;
+    color: var(--text-muted);
+  }
+  
+  /* Right Column: Action Button spans all rows */
+  .song-row .col-actions {
+    grid-column: 5;
+    grid-row: 1 / 4;
+    justify-self: end;
+    padding-right: 0;
+    width: auto !important;
+  }
+  
+  /* Make play button highly visible and responsive on touch */
+  .song-row .row-play-icon {
+    width: 2.1rem;
+    height: 2.1rem;
+    opacity: 1; /* Always visible on mobile touch screens! */
+  }
+  
+  /* Make add button touch friendly */
+  .song-row .btn-row-add {
+    width: 2.4rem;
+    height: 2.4rem;
   }
 }
 
