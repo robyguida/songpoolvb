@@ -1862,7 +1862,7 @@ button, input, select {
     gap: 0.25rem 0.5rem !important;
   }
 
-  .header-left > div:first-child > div {
+  .header-left > div:first-child > div:not(.church-logo-container) {
     display: contents !important; /* Allow direct grid alignment of tagline and title */
   }
 
