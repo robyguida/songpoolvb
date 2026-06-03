@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
   <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="index.css?v=1.1">
 </head>
 <body>
 
@@ -39,14 +39,24 @@
           <p class="header-subtitle">Wähle Akkordblätter, transponiere live und plane deine Sonntags-Setlist (30 Songs verfügbar)</p>
         </div>
         
-        <!-- Toggle Setlist Drawer Button -->
-        <button class="btn-setlist-toggle" id="setlistToggle" aria-label="Setlist einblenden">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width: 1.2rem; height: 1.2rem;">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5-3.75h16.5m-16.5 7.5h16.5" />
-          </svg>
-          Sonntags-Setlist
-          <span class="count-badge" id="setlistCountBadge">0</span>
-        </button>
+        <!-- Header Actions -->
+        <div style="display: flex; gap: 0.75rem; align-items: center;">
+          <!-- Toggle Setlist Drawer Button -->
+          <button class="btn-setlist-toggle" id="setlistToggle" aria-label="Setlist einblenden">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width: 1.2rem; height: 1.2rem;">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5-3.75h16.5m-16.5 7.5h16.5" />
+            </svg>
+            Sonntags-Setlist
+            <span class="count-badge" id="setlistCountBadge">0</span>
+          </button>
+          
+          <!-- Logout Button -->
+          <button class="btn-logout" id="btnLogout" onclick="logout()" title="Abmelden" aria-label="Abmelden" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08); padding: 0.75rem; border-radius: 0.75rem; cursor: pointer; color: var(--text-muted); display: flex; align-items: center; justify-content: center; transition: background 0.2s, color 0.2s;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width: 1.2rem; height: 1.2rem;">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+            </svg>
+          </button>
+        </div>
       </header>
       
       <!-- Search, Filter & Sort Panel -->
@@ -293,10 +303,32 @@
 
   </div>
 
+  <!-- Shared Password Lockscreen Overlay -->
+  <div id="loginOverlay" class="login-overlay">
+    <div class="login-card">
+      <div class="church-logo-container login-logo">
+        <img id="churchLogoLogin" src="logo.png" alt="Vineyard Bern Logo" onerror="this.style.display='none'; document.getElementById('loginLogoPlaceholder').style.display='flex';">
+        <div id="loginLogoPlaceholder" class="logo-placeholder" style="display: none; background: var(--primary-color); color: #fff;">V</div>
+      </div>
+      <div class="login-tagline">Vineyard Bern</div>
+      <h2 class="login-title">Worship Community <span>Songpool</span></h2>
+      <p class="login-subtitle">Bitte gib das Passwort der Worship Community ein, um fortzufahren.</p>
+      
+      <form id="loginForm" onsubmit="handleLoginSubmit(event)">
+        <div class="input-group">
+          <input type="password" id="passwordInput" placeholder="Passwort eingeben" required autocomplete="current-password">
+        </div>
+        <div id="loginError" class="login-error" style="display: none;">Falsches Passwort. Bitte versuche es erneut.</div>
+        <button type="submit" class="btn-login">Anmelden</button>
+      </form>
+    </div>
+  </div>
+
   <!-- Dedicated print-only container to bypass CSS columns page-break bugs -->
   <div id="printArea" class="print-only"></div>
  
   <!-- Database & Scripts Integration -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="songs-data.js"></script>
   <script src="app.js"></script>
 </body>

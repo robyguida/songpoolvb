@@ -4,6 +4,9 @@
  * and a robust real-time chord transposition engine.
  */
 
+// --- Shared Authentication Settings ---
+const SHARED_PASSWORD = 'vibe2026';
+
 // --- Global State ---
 let activeSetlist = [];
 let currentModalSong = null;
@@ -61,6 +64,9 @@ const btnDownloadPDF = document.getElementById('btnDownloadPDF');
 
 // --- Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
+  // 0. Check Authentication State
+  checkAuthenticationState();
+
   // 1. Load Setlist from localStorage
   loadSetlistFromStorage();
   
@@ -628,6 +634,26 @@ function displayChordSheet() {
       return;
     }
 
+    // Check if it is a rhythm-only line (no lyrics, just slashes, bars, spaces, etc.)
+    const textWithoutChords = line.replace(/\[[^\]]+\]/g, '');
+    const isRhythmLine = /^[ /|\\\-\d().,x]*$/i.test(textWithoutChords);
+
+    if (isRhythmLine) {
+      let renderedLine = line.replace(/\[([^\]]+)\]/g, (match, chordVal) => {
+        let transposedChord = transposeChord(chordVal, shift, useFlats);
+        if (activeNotation === 'numbers') {
+          transposedChord = chordToNumber(transposedChord, currentModalKey);
+        }
+        return `<span class="chord-token">${transposedChord}</span>`;
+      });
+      if (inSection) {
+        activeSectionLines.push(renderedLine);
+      } else {
+        renderedLines.push(renderedLine);
+      }
+      return;
+    }
+
     // Construct chordsLine and lyricsLine
     let chordsLineHtml = "";
     let visibleChordsLength = 0;
@@ -797,21 +823,380 @@ function shiftNote(note, shift, useFlats) {
   return scale[newSemi];
 }
 
-// --- PDF Stampa using window.print() ---
-function downloadPDF() {
-  if (!currentModalSong) return;
+// --- Helper to fetch, base64 encode and register custom TTF fonts in jsPDF VFS ---
+async function addCustomFontFromUrl(doc, url, family, style) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`Failed to fetch font from ${url}`);
+  const arrayBuffer = await response.arrayBuffer();
   
-  if (document.fonts) {
-    document.fonts.ready.then(() => {
-      window.print();
-    }).catch((err) => {
-      console.warn("Font loading failed, printing anyway:", err);
-      window.print();
-    });
+  // Convert ArrayBuffer to binary string safely
+  let binaryString = "";
+  const bytes = new Uint8Array(arrayBuffer);
+  const len = bytes.byteLength;
+  for (let i = 0; i < len; i++) {
+    binaryString += String.fromCharCode(bytes[i]);
+  }
+  const base64 = btoa(binaryString);
+  
+  const filename = `${family}-${style}.ttf`;
+  doc.addFileToVFS(filename, base64);
+  doc.addFont(filename, family, style);
+}
+
+// --- Structured transposition parser for PDF drawing alignment ---
+function getTransposedSongLines() {
+  if (!currentModalSong || !currentModalKey) return [];
+
+  const originalBase = currentModalSong.key.replace('m', '');
+  const targetBase = currentModalKey.replace('m', '');
+
+  const fromSemi = NOTE_TO_SEMITONE[originalBase];
+  const toSemi = NOTE_TO_SEMITONE[targetBase];
+
+  if (fromSemi === undefined || toSemi === undefined) {
+    return currentModalSong.chords.trim().split('\n').map(line => ({ type: 'lyrics', text: line }));
+  }
+
+  const shift = (toSemi - fromSemi + 12) % 12;
+  const useFlats = FLAT_KEYS.includes(targetBase);
+
+  const cleanChords = currentModalSong.chords.trim();
+  const rawLines = cleanChords.split('\n');
+  
+  let lines = [];
+
+  rawLines.forEach(line => {
+    // Check if section header
+    const sectionHeaderMatch = line.match(/^\[(Verse \d+|Chorus|Pre-Chorus|Bridge|Intro|Outro|Channel \d+|Interlude)([^\]]*)\]\s*$/i);
+    if (sectionHeaderMatch) {
+      const headerText = sectionHeaderMatch[1].toUpperCase() + (sectionHeaderMatch[2] ? sectionHeaderMatch[2].toUpperCase() : '');
+      lines.push({ type: 'section-header', text: headerText });
+      return;
+    }
+
+    const chordRegex = /\[([^\]]+)\]/g;
+    const hasChords = line.match(chordRegex);
+
+    if (!hasChords) {
+      lines.push({ type: 'lyrics', text: line });
+      return;
+    }
+
+    // Check if it is a rhythm-only line (no lyrics, just slashes, bars, spaces, etc.)
+    const textWithoutChords = line.replace(/\[[^\]]+\]/g, '');
+    const isRhythmLine = /^[ /|\\\-\d().,x]*$/i.test(textWithoutChords);
+
+    if (isRhythmLine) {
+      let renderedLine = line.replace(/\[([^\]]+)\]/g, (match, chordVal) => {
+        let transposedChord = transposeChord(chordVal, shift, useFlats);
+        if (activeNotation === 'numbers') {
+          transposedChord = chordToNumber(transposedChord, currentModalKey);
+        }
+        return transposedChord;
+      });
+      lines.push({ type: 'chords', text: renderedLine });
+      return;
+    }
+
+    let chordsLine = "";
+    let visibleChordsLength = 0;
+    let lyricsLine = "";
+
+    let index = 0;
+    while (index < line.length) {
+      if (line[index] === '[') {
+        const endIdx = line.indexOf(']', index);
+        if (endIdx > -1) {
+          const chordVal = line.substring(index + 1, endIdx);
+          
+          let transposedChord = transposeChord(chordVal, shift, useFlats);
+          if (activeNotation === 'numbers') {
+            transposedChord = chordToNumber(transposedChord, currentModalKey);
+          }
+          
+          const targetPos = lyricsLine.length;
+          
+          while (visibleChordsLength < targetPos) {
+            chordsLine += " ";
+            visibleChordsLength++;
+          }
+
+          if (visibleChordsLength > targetPos && chordsLine.length > 0) {
+            chordsLine += " ";
+            visibleChordsLength++;
+          }
+
+          chordsLine += transposedChord;
+          visibleChordsLength += transposedChord.length;
+
+          index = endIdx + 1;
+          continue;
+        }
+      }
+
+      lyricsLine += line[index];
+      index++;
+    }
+
+    lines.push({ type: 'chords', text: chordsLine });
+    lines.push({ type: 'lyrics', text: lyricsLine });
+  });
+
+  return lines;
+}
+
+// --- Draw a single line with precise styling ---
+function drawPDFLine(doc, line, x, y, fontRegular, fontBold) {
+  if (line.type === 'section-header') {
+    doc.setFont(fontBold, 'bold');
+    doc.setFontSize(8.5);
+    doc.setTextColor(110, 110, 110);
+    doc.text(line.text, x, y);
+    return y + 4.5;
+  } else if (line.type === 'chords') {
+    doc.setFont(fontBold, 'bold');
+    doc.setFontSize(8.2);
+    doc.setTextColor(63, 56, 202); // Deep Indigo
+    doc.text(line.text, x, y);
+    return y + 3.4; // chords closer to lyrics below
   } else {
-    window.print();
+    // Lyrics line or empty space
+    doc.setFont(fontRegular, 'normal');
+    doc.setFontSize(8.2);
+    doc.setTextColor(30, 30, 30);
+    doc.text(line.text, x, y);
+    return y + 4.8; // larger gap to next line/block
+  }
+}
+
+// --- Custom Client-side Vector PDF Generation using jsPDF ---
+async function downloadPDF() {
+  if (!currentModalSong) return;
+
+  const btn = document.getElementById('btnDownloadPDF');
+  const originalContent = btn.innerHTML;
+  
+  // Show loading indicator
+  btn.disabled = true;
+  btn.style.opacity = '0.7';
+  btn.innerHTML = `
+    <svg class="animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" style="width: 1.1rem; height: 1.1rem; animation: spin 1s linear infinite; margin-right: 0.5rem; display: inline-block; vertical-align: middle;">
+      <circle style="opacity: 0.25;" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path style="opacity: 0.75;" fill="currentColor" d="M 4 12 a 8 8 0 0 1 8 -8 V 0 C 5.373 0 0 5.373 0 12 h 4 z"></path>
+    </svg>
+    Erstelle PDF...
+  `;
+
+  // Inject spin keyframes if not existing
+  if (!document.getElementById('pdf-spin-style')) {
+    const style = document.createElement('style');
+    style.id = 'pdf-spin-style';
+    style.textContent = `@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`;
+    document.head.appendChild(style);
+  }
+
+  try {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: 'a4'
+    });
+
+    let fontRegular = 'JetBrainsMono';
+    let fontBold = 'JetBrainsMono';
+
+    // Attempt to load JetBrains Mono from CDN for full Unicode/umlauts support
+    try {
+      await addCustomFontFromUrl(doc, 'https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/ttf/JetBrainsMono-Regular.ttf', 'JetBrainsMono', 'normal');
+      await addCustomFontFromUrl(doc, 'https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/ttf/JetBrainsMono-Bold.ttf', 'JetBrainsMono', 'bold');
+    } catch (err) {
+      console.warn("Could not load JetBrains Mono, falling back to Courier:", err);
+      fontRegular = 'courier';
+      fontBold = 'courier';
+    }
+
+    // 1. Draw SongSelect-Style Clean Header
+    // Title
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(18);
+    doc.setTextColor(26, 26, 26);
+    doc.text(currentModalSong.title, 15, 20);
+
+    // Author
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(110, 110, 110);
+    doc.text(`Von ${currentModalSong.author}`, 15, 25);
+
+    // Divider Line 1
+    doc.setDrawColor(225, 225, 225);
+    doc.setLineWidth(0.3);
+    doc.line(15, 27, 195, 27);
+
+    // Metadata Row
+    const timeSig = currentModalSong.timeSig || (currentModalSong.bpm > 90 ? "4/4" : (currentModalSong.bpm > 75 ? "6/8" : "3/4"));
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setTextColor(70, 70, 70);
+    doc.text(`Tonart: ${currentModalKey}   |   BPM: ${currentModalSong.bpm}   |   Takt: ${timeSig}`, 15, 32);
+
+    // Divider Line 2
+    doc.line(15, 34, 195, 34);
+
+    // Get parsed/transposed structured lines
+    const lines = getTransposedSongLines();
+
+    // 2. Layout Positioning and Columns Distribution
+    const colMaxLines = 52;
+    const totalLines = lines.length;
+    const yStart = 42;
+
+    if (totalLines <= colMaxLines) {
+      // Single Column Layout
+      let y = yStart;
+      lines.forEach(line => {
+        y = drawPDFLine(doc, line, 15, y, fontRegular, fontBold);
+      });
+    } else {
+      // Balanced Two-Column Layout (without breaking sections)
+      let sections = [];
+      let currentSec = [];
+      lines.forEach(line => {
+        if (line.type === 'section-header' && currentSec.length > 0) {
+          sections.push(currentSec);
+          currentSec = [];
+        }
+        currentSec.push(line);
+      });
+      if (currentSec.length > 0) {
+        sections.push(currentSec);
+      }
+
+      let col1Sections = [];
+      let col2Sections = [];
+      let col1LinesCount = 0;
+      const halfLines = totalLines / 2;
+
+      sections.forEach(sec => {
+        if (col1LinesCount < halfLines) {
+          col1Sections.push(sec);
+          col1LinesCount += sec.length;
+        } else {
+          col2Sections.push(sec);
+        }
+      });
+
+      // Render Column 1
+      let y = yStart;
+      col1Sections.forEach(sec => {
+        sec.forEach(line => {
+          y = drawPDFLine(doc, line, 15, y, fontRegular, fontBold);
+        });
+        y += 2.0; // small section gap
+      });
+
+      // Render Column 2
+      y = yStart;
+      col2Sections.forEach(sec => {
+        sec.forEach(line => {
+          y = drawPDFLine(doc, line, 110, y, fontRegular, fontBold);
+        });
+        y += 2.0; // small section gap
+      });
+    }
+
+    // 3. Draw Footer Note at the bottom of A4 page (CCLI + Vineyard usage warning)
+    doc.setFont('helvetica', 'italic');
+    doc.setFontSize(7.5);
+    doc.setTextColor(130, 130, 130);
+
+    const vineyardNotice = "Nur für den Gebrauch in den Gottesdiensten der Vineyard Bern. Jegliche andere oder externe Nutzung ist untersagt.";
+
+    if (currentModalSong.ccli) {
+      // Draw divider line slightly higher to accommodate two footer lines
+      doc.setDrawColor(230, 230, 230);
+      doc.setLineWidth(0.2);
+      doc.line(15, 279, 195, 279);
+
+      doc.text(`CCLI-Songnummer: ${currentModalSong.ccli}`, 105, 283, { align: 'center' });
+      doc.text(vineyardNotice, 105, 287, { align: 'center' });
+    } else {
+      // Draw divider line
+      doc.setDrawColor(230, 230, 230);
+      doc.setLineWidth(0.2);
+      doc.line(15, 282, 195, 282);
+
+      doc.text(vineyardNotice, 105, 287, { align: 'center' });
+    }
+
+    // Save/Download PDF
+    const filename = `${currentModalSong.title} - Chords & Lyrics.pdf`;
+    doc.save(filename);
+
+  } catch (err) {
+    console.error("PDF generation failed:", err);
+    alert("PDF konnte nicht erstellt werden. Bitte versuche es erneut.");
+  } finally {
+    // Reset button state
+    btn.disabled = false;
+    btn.style.opacity = '';
+    btn.innerHTML = originalContent;
   }
 }
 
 // Bind to window for backup inline triggers
 window.downloadPDF = downloadPDF;
+
+// --- Shared Password Lockscreen Authentication Logic ---
+function checkAuthenticationState() {
+  const isAuth = localStorage.getItem('songpool_authenticated') === 'true';
+  const overlay = document.getElementById('loginOverlay');
+  if (overlay) {
+    if (isAuth) {
+      overlay.classList.add('hidden');
+    } else {
+      overlay.classList.remove('hidden');
+      const pwdInput = document.getElementById('passwordInput');
+      if (pwdInput) {
+        pwdInput.focus();
+      }
+    }
+  }
+}
+
+function handleLoginSubmit(event) {
+  event.preventDefault();
+  const passwordInput = document.getElementById('passwordInput');
+  const errorMsg = document.getElementById('loginError');
+  const overlay = document.getElementById('loginOverlay');
+
+  if (passwordInput && passwordInput.value === SHARED_PASSWORD) {
+    localStorage.setItem('songpool_authenticated', 'true');
+    if (overlay) {
+      overlay.classList.add('hidden');
+    }
+    if (errorMsg) {
+      errorMsg.style.display = 'none';
+    }
+    passwordInput.value = '';
+  } else {
+    if (errorMsg) {
+      errorMsg.style.display = 'block';
+    }
+    if (passwordInput) {
+      passwordInput.value = '';
+      passwordInput.focus();
+    }
+  }
+}
+
+function logout() {
+  localStorage.removeItem('songpool_authenticated');
+  checkAuthenticationState();
+}
+
+// Bind to window for HTML event handlers
+window.checkAuthenticationState = checkAuthenticationState;
+window.handleLoginSubmit = handleLoginSubmit;
+window.logout = logout;
