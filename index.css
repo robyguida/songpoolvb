@@ -1855,47 +1855,64 @@ button, input, select {
 /* Extra small mobile adjustments */
 @media (max-width: 480px) {
   .header-left > div:first-child {
-    flex-direction: column !important; /* Stack logo on top, texts below */
-    align-items: flex-start !important; /* Align logo and texts to the left edge */
-    gap: 0.5rem !important;
+    display: grid !important;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: 0.25rem 0.5rem !important;
+  }
+
+  .header-left > div:first-child > div {
+    display: contents !important; /* Allow direct grid alignment of tagline and title */
   }
 
   .church-logo-container {
-    width: 2.2rem !important; /* Smaller logo in header on mobile */
-    height: 2.2rem !important;
-    margin-bottom: 0.25rem;
+    grid-column: 1;
+    grid-row: 1;
+    width: 1.5rem !important; /* Even smaller logo */
+    height: 1.5rem !important;
+    border-width: 1px !important;
   }
 
   .logo-placeholder {
-    font-size: 1rem !important;
+    font-size: 0.8rem !important;
+  }
+
+  .header-tagline {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    align-self: center;
+    margin-bottom: 0 !important;
   }
 
   .header-title {
-    font-size: 1.45rem !important; /* Clean font size for title */
-    display: block !important; /* Block layout so elements flow naturally */
-    line-height: 1.2;
+    grid-column: 1 / 3; /* Start under the logo from the very left edge */
+    grid-row: 2;
+    font-size: 1.85rem !important; /* Make the title larger as requested! */
+    display: block !important;
+    line-height: 1.15;
+    margin-top: 0.35rem;
   }
   
   .header-title span {
-    display: inline-block; /* Keep inline-block next to main text if it fits, or wrap */
-  }
-  
-  .header-tagline {
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
+    display: block !important; /* Push Songpool to a new line */
+    font-size: 1.5rem !important; /* Slightly smaller for hierarchical structure */
+    margin-top: 0.15rem;
   }
   
   /* Center the actions in the middle of the screen and bring them close together */
   .app-header > div:last-child {
     width: 100%;
-    justify-content: center !important; /* Center the buttons together */
-    gap: 0.5rem !important; /* Closer spacing */
+    justify-content: center !important;
+    gap: 0.5rem !important;
   }
 
   /* Reduce the size of the Sonntags-Setlist button */
   .btn-setlist-toggle {
-    padding: 0.5rem 0.85rem !important; /* Reduced padding */
-    font-size: 0.8rem !important; /* Smaller text size */
+    padding: 0.5rem 0.85rem !important;
+    font-size: 0.8rem !important;
     gap: 0.4rem !important;
     border-radius: 0.5rem !important;
   }
