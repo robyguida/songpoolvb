@@ -478,13 +478,25 @@ function openChordModal(songId) {
   modalMetronomeBpm.textContent = `${song.bpm} BPM`;
   modalAuthorDetail.textContent = song.author;
   
+  // Populate Year and toggle visibility
+  const modalYearGroup = document.getElementById('modalYearGroup');
+  const modalYearDetail = document.getElementById('modalYearDetail');
+  if (modalYearGroup && modalYearDetail) {
+    if (song.year) {
+      modalYearDetail.textContent = song.year;
+      modalYearGroup.style.display = '';
+    } else {
+      modalYearGroup.style.display = 'none';
+    }
+  }
+  
   // Use custom timeSig or estimate based on BPM
   const timeSig = song.timeSig || (song.bpm > 90 ? "4/4" : (song.bpm > 75 ? "6/8" : "3/4"));
   modalTimeSig.textContent = `Taktart: ${timeSig}`;
 
-  // Use custom CCLI or generate dynamic CCLI song number hash
-  const songHash = song.ccli || song.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 1047190);
-  modalCcliHash.textContent = `CCLI: ${songHash}`;
+  // Use custom CCLI or show dash
+  const songCcli = song.ccli || '-';
+  modalCcliHash.textContent = `CCLI: ${songCcli}`;
 
   // Set Recording Links and toggle visibility based on presence of local audio
   if (song.audio) {
@@ -937,7 +949,6 @@ function displayChordSheet() {
   let renderedLines = [];
 
   // 1. Generate Authentic SongSelect Header Block
-  const songHash = currentModalSong.ccli || currentModalSong.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 1047190);
   const timeSig = currentModalSong.timeSig || (currentModalSong.bpm > 90 ? "4/4" : (currentModalSong.bpm > 75 ? "6/8" : "3/4"));
   
   const headerHtml = `
@@ -1116,7 +1127,14 @@ const INTERVAL_TO_DEGREE = {
 };
 
 function chordToNumber(chordStr, key) {
-  const match = chordStr.match(/^([A-G][b#]?[^ /|]*(?:\/[A-G][b#]?[^ /|]*)?)(.*)$/);
+  let hasParens = false;
+  let cleanChordStr = chordStr;
+  if (chordStr.startsWith('(') && chordStr.endsWith(')')) {
+    hasParens = true;
+    cleanChordStr = chordStr.slice(1, -1);
+  }
+
+  const match = cleanChordStr.match(/^([A-G][b#]?[^ /|]*(?:\/[A-G][b#]?[^ /|]*)?)(.*)$/);
   if (!match) return chordStr;
 
   const chordVal = match[1];
@@ -1125,7 +1143,9 @@ function chordToNumber(chordStr, key) {
   const keyBase = key.replace('m', '');
   const keySemi = NOTE_TO_SEMITONE[keyBase];
 
-  if (keySemi === undefined) return chordStr;
+  if (keySemi === undefined) {
+    return hasParens ? `(${cleanChordStr})` : chordStr;
+  }
 
   const parts = chordVal.split('/');
   const baseNum = convertSingleChordToNumber(parts[0], keySemi);
@@ -1136,7 +1156,8 @@ function chordToNumber(chordStr, key) {
     finalChord = `${baseNum}/${bassNum}`;
   }
 
-  return finalChord + rest;
+  const result = finalChord + rest;
+  return hasParens ? `(${result})` : result;
 }
 
 function convertSingleChordToNumber(chordPart, keySemi) {
@@ -1165,13 +1186,22 @@ function convertNoteToNumber(note, keySemi) {
 
 // --- Chord Transposition Core Helpers ---
 function transposeChord(chordStr, shift, useFlats) {
-  const match = chordStr.match(/^([A-G][b#]?[^ /|]*(?:\/[A-G][b#]?[^ /|]*)?)(.*)$/);
+  let hasParens = false;
+  let cleanChordStr = chordStr;
+  if (chordStr.startsWith('(') && chordStr.endsWith(')')) {
+    hasParens = true;
+    cleanChordStr = chordStr.slice(1, -1);
+  }
+
+  const match = cleanChordStr.match(/^([A-G][b#]?[^ /|]*(?:\/[A-G][b#]?[^ /|]*)?)(.*)$/);
   if (!match) return chordStr;
 
   const chordVal = match[1];
   const rest = match[2];
 
-  if (shift === 0) return chordStr;
+  if (shift === 0) {
+    return hasParens ? `(${cleanChordStr})` : chordStr;
+  }
 
   const parts = chordVal.split('/');
   const rootChordTransposed = transposeSingleRootChord(parts[0], shift, useFlats);
@@ -1182,7 +1212,8 @@ function transposeChord(chordStr, shift, useFlats) {
     finalChord = `${rootChordTransposed}/${bassTransposed}`;
   }
 
-  return finalChord + rest;
+  const result = finalChord + rest;
+  return hasParens ? `(${result})` : result;
 }
 
 function transposeSingleRootChord(chordPart, shift, useFlats) {

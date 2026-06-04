@@ -14,6 +14,7 @@ const SONGS = [
     timeSig: "4/4",
     theme: "Anbetung",
     language: "de-ch",
+    year: 2023,
     ccli: 7214213,
     youtube: "https://www.youtube.com/watch?v=f9HQDMDA3ts&list=RDf9HQDMDA3ts&start_radio=1&pp=ygUQVklCRSBDaHVtIHp1IG1pcqAHAQ%3D%3D",
     spotify: "https://open.spotify.com/intl-it/track/66bVWz8jLrnxJqEPjXufd5?si=08d68fe0d0804b62",
@@ -89,6 +90,7 @@ const SONGS = [
     timeSig: "12/8",
     theme: "Dankbarkeit / Kreuz",
     language: "de-ch",
+    year: 2025,
     youtube: "https://www.youtube.com/results?search_query=Cornelia+Guida+Danke+f%C3%BCr+dis+Chr%C3%BCz",
     audio: "Danke für dis Chrüz.mp3",
     chords: `[Intro]
@@ -96,45 +98,52 @@ const SONGS = [
 [A] / [B/A] / | [A] / [B/A] / | [E] / / / | [A/E] / [E] /
 
 [Verse 1]
-Es git nur [E]ei Ort, wo [E/D#]wahri Freiheit isch
-Es git nur [C#m7]ei Wäg, wo d’[E/B]Schuld für geng besiegt
+Es git nur [E]ei Ort, wo wahri Freiheit [E/D#]isch
+Es git nur [C#m7]ei Wäg, wo d’Schuld für geng be[E/B]siegt
 Das isch [A]Jesus Christus, [B/A]Sohn vo Gott
-wo [A]gstorbe isch [B/A]am [E]Chrüz uf Golgatha [A/E] [E]
+wo [A]gstorbe isch am [B/A]Chrüz uf Golga[E]tha  [A/E]  [E]
 
 [Verse 2]
-Es git nur [E]ei Plan, für d’[B/D#]Rettig vo dr Wäut
-Es git nur [C#m7]eis Ziel, wo [E/B]füehrt id Ewigkeit
+Es git nur [E]ei Plan, für d’Rettig vo dr Wä[B/D#]ut
+Es git nur [C#m7]eis Ziel, wo füehrt id Ewig[E/B]keit
 Das isch [A]Jesus Christus, [B/A]Sohn vo Gott
-Wo [A]gstorbe isch [B/A]am [E]Chrüz uf Golgatha [A/E] [E]
+Wo [A]gstorbe isch am [B/A]Chrüz uf Golga[E]tha [A/E] [E]
 Das isch [A]Jesus Christus, [B/A]Sohn vo Gott
-wo [A]gstorbe isch [B/A]am [E]Chrüz uf Golgatha [Bsus4] [B]
+Wo [A]gstorbe isch am [B/A]Chrüz uf Golga[E]tha [Bsus4] [B]
 
 [Chorus]
 Danke für dis [E]Chrüz
-[B/D#]Was du für üs hesch [C#m7]ta
+Was [B/D#]du für üs hesch [C#m7]ta
 Danke für dis [A]Chrüz
-[Bsus4]Hesch dis Läbe für [B]üs glah
+Hesch dis [Bsus4]Läbe für üs [B]glah
 Danke für di [E]Liib
-[B/D#]Wo broche hesch [C#m7]für üs
+Wo [B/D#]broche hesch für [C#m7]üs
 Danke für dis [A]Bluet
-[Bsus4]Wo du vergosse hesch [B]für üs
+Wo du ver[Bsus4]gosse hesch für [B]üs
+
+Danke für dis [(E)]Chrüz
 
 [Interlude]
 [E] / [B/D#] / | [C#m7] / / /
 [A] / / / | [Bsus4] / [B] /
-(Danke für dis Chrüz)
-[E] / [B/D#] / | [C#m7] / / /
-[A] / / / | [Bsus4] / [B] /
+
+[Verse 2]
+
+[Chorus]
+
+[Interlude (2x)]
 
 [Instrumental]
 [A] / / [B/D#] | [C#m7] / / /
 [B/D#] / / / | [Esus4] / [E] /
 
-[Bridge]
-[A]Halleluja du [B]hesch dr [C#m7]Sieg
-dert am [B/D#]Chrüz, dür di Tod und dis [Esus4]ufer[E]stah
-[A]Halleluja, [B]mir si [C#m7]befreit
-Dert am [B/D#]Chrüz, hesch du au üsi Schuld [Esus4]ert[E]reit`
+[Bridge (2x)]
+Halle[A]luja, du [B]hesch dr [C#m7]Sieg
+dert am [B/D#]Chrüz, dür di Tod und dis ufer[Esus4]stah   [E]
+Halle[A]luja, mir [B]si be[C#m7]freit
+Dert am [B/D#]Chrüz, hesch du au üsi Schuld ert[Esus4]reit   [E]
+
+[Chorus]`
   },
   {
     id: "dr-sunne-entgaege",
@@ -145,59 +154,109 @@ Dert am [B/D#]Chrüz, hesch du au üsi Schuld [Esus4]ert[E]reit`
     timeSig: "4/4",
     theme: "Lobpreis / Vertrauen",
     language: "de-ch",
-    youtube: "https://www.youtube.com/results?search_query=Jo%C3%ABl+Ung+Dr+Sunne+entg%C3%A4ge",
-    chords: `[Verse 1]
-Für geng [F#]bisch Du bi mir
+    year: 2016,
+    youtube: "https://www.youtube.com/watch?v=es1RqY4Eu9o",
+    spotify: "https://open.spotify.com/intl-it/track/6aNfvb5v6mLm7lX3T453u1?si=2f0ed58615394b8f",
+    applemusic: "https://music.apple.com/ch/album/dr-sunne-entg%C3%A4ge/1517758847?i=1517758856&l=it",
+    chords: `[Intro]
+[F#] / / / | / / / / | [G#] / / / | / / / /
+[F#] / / / | / / / / | [G#] / / / | / / / /
+    
+[Verse 1]
+Für geng bisch [F#]Du bi mir
 Was wett i [G#]ohni Di
-Für geng [F#]bisch Du bi mir
+Für geng bisch [F#]Du bi mir
 Was wett i [G#]ohni Di
+
+[Instrumental]
+[F#] / / / | / / / / | [G#] / / / | / / / /
+[F#] / / / | / / / / | [G#] / / / | / / / /
+
+[Verse 1]
 
 [Pre-Chorus]
 Du setzisch d’[A#m]Sägu [G#/C]wider [F#]nöi
-Für di Fahrt [A#m]dr [G#/C]Sunne [F#]entgäge
-into Chorus: [C#] (statt [F#])
+Für di Fahrt [A#m]dr Sunne [G#/C] entgäge [F#]
+Du setzisch d’[A#m]Sägu [G#/C]wider [F#]nöi
+Für di Fahrt [A#m]dr Sunne [G#/C] entgäge [C#]
 
 [Chorus]
 Du [C#]treisch mi und [G#]nimmsch mi i Di [F#]Arm
 [C#]Zrügg i die [G#]Freiheit, wo Di [F#]Friede wohnt
 Du [C#]zeigsch mir und [G#]nimmsch mi a Dir [F#]Hand
-[C#]Zrügg a dä [G#]Ort, wo di [F#]Liebi wachst
-into Bridge: [C#]
+[C#]Zrügg a dä [G#]Ort, wo di [F#]Liebi wachst  [C# / / /] 
 
-[Bridge]
-[A#m]Niemer und [Fm]Nüt cha [F#]mi je trenne
-[C#]Vo Dire [G#]Liebi, [C#]grosse Gott
-Da, wo [A#m]Di Geischt [Fm]würkt, [F#]isch die Freiheit
-A [C#]däm Ort [G#]wott i [C#]blibe und nie meh ga
-U ou [A#m]wenn ig [Fm]einisch [F#]sött vergässe
-Mis Härz tuet [C#]das nie, mis Härz tuet [G#]das nie`
+[Bridge 1]
+Niemer und [A#m]Nüt cha [Fm]mi je tr[F#]enne
+Vo Dire L[C#]iebi, [G#]grosse Gott [C#]
+Da, wo Di Ge[A#m]ischt würkt, [Fm]isch die Frei[F#]heit
+A däm Ort wott i bli[C#]be und [G#]nie meh ga [C#]
+
+[Bridge 2]
+Niemer und [A#m]Nüt cha [Fm]mi je tr[F#]enne
+Vo Dire L[C#]iebi, [G#]grosse Gott [C#]
+Da, wo Di Ge[A#m]ischt würkt, [Fm]isch die Frei[F#]heit
+A däm Ort wott i bli[C#]be und [G#]nie meh ga [C#]
+U ou wenn ig e[A#m]inisch [Fm]sött vergä[F#]sse
+Mis Härz tuet das [C#]nie, mis Härz tuet das [G#]nie
+
+[Instrumental]
+[C#] / / / | [G#] / / / | [F#] / / / | / / / /
+[C#] / / / | [G#] / / / | [F#] / / / | / / / /
+[Chorus]
+[Pre-Chorus]`
   },
   {
     id: "du-bisch-mi-gott",
     title: "Du bisch mi Gott",
     author: "Romano Soltermann",
-    key: "D",
-    bpm: 70,
+    key: "E",
+    bpm: 89,
+    timeSig: "4/4",
     theme: "Anbetung / Hingabe",
     language: "de-ch",
+    year: 2018,
+    audio: "Du bisch mi Gott.mp3",
     youtube: "https://www.youtube.com/results?search_query=Romano+Soltermann+Du+bisch+mi+Gott",
-    chords: `[Verse 1]
-[D]Du bisch mi Gott, i [A]bäte di a
-[Bm]Nüt uf däre Wält cha di [G]jemals ersetze
-[D]Mis Läbe ghört dir [A]ganz und gar
-[Bm]Halt mi fescht in [G]diner Hand
+    chords: `[Intro]
+[E] [A>] / / | [E] [A>] / / | [E] [A>] / / | [E] [A>] / / 
+[E] [A>] / / | [E] [A>] / / | [E] [A>] / / | [E] [A>] / / 
+    
+[Verse 1]
+[E]Dene wo di liebe, dene [A]steisch du zur Siite
+Du [E]erfülsch was du versporche hesch, uf [A]dis Wort isch verlass
+I danke [E]dir für dini Güeti, dini [A]Gnad und Geduld
+I liebe [E]di u dini Wunderwerk, u i [A]fröie mi a dir
+
+[Instrumental]
+[E] [A>] / / | [E] [A>] / / | [E] [A>] / / | [E] [A>] / / 
+
+[Verse 1]
 
 [Chorus]
-[D]I singe dir es [A]Lied vo Liebi
-[Bm]I beuge mini [G]Chneu vor dir
-[D]Allmächtige [A]Schöpfer, Retter
-[Bm]Du bisch mi [G]Gott
+Wöu [B]du, [A]du bisch mi Gott [E A> / / | E A> / /]
+U [B]di abäte, [A] isch das wo i wott [E A> / / | E A> / /]
+[E A> / / | E A> / /]
 
 [Verse 2]
-[D]In Sturmzyte [A]bisch du mi Fels
-[Bm]In Trubsuu [G]bisch du mi Troscht
-[D]I vertroue [A]uf dis Wort
-[Bm]Du versprichsch [G]dass d'bi mir bisch`
+Du [E]bisch für mi ads chrütz, hesch [A]aues für mi gä
+[E]Hesch für mini Schuld zahlt, mi für [A]immer befreit
+Bisch dr [E]wäg für mi zum Vater, du [A]füersch mi direkt zu ihm
+I danke [E]dir für dini Gägewart, i bi [A]gärn bi dir 
+
+[Chorus (2x)]
+
+[Bridge (2x)]
+[C#m]Du bisch dr Gott vom Friede, [B]du bisch dr Gott vom Sieg
+[C#m]Du hesch di säuber häre [B]gä, a steu vo mire Schuld
+[C#m]Dir isch aui Herrlech[B]keit, dir isch aui Macht
+[C#m]Regier du i mire [B]Seel, regier du über mir
+
+[Interlude] 
+[Chorus (2x)] 
+[Instrumental]
+[Outro]
+[E]Giess di [A]Geist us, [E]giess di [A]Geist us, [E]giess di [A]Geist us [E]  [A]`
   },
   {
     id: "gross-usecho",
@@ -228,30 +287,53 @@ Mis Härz tuet [C#]das nie, mis Härz tuet [G#]das nie`
   },
   {
     id: "gwautigi-liebi",
-    title: "Gwautigi Liebi",
-    author: "Eden",
-    key: "G",
-    bpm: 72,
+    title: "Gwautegi Liebi",
+    author: "Cornelia Guida, Esther Weiss, Fabian Schmid, Marc Steiner, Maria Fiechter, Michael Hauser, Nino Luca Küenzi",
+    key: "Eb",
+    bpm: 168,
+    timeSig: "6/8",
     theme: "Anbetung / Liebe Gottes",
     language: "de-ch",
+    year: 2021,
+    ccli: 7176315,
     youtube: "https://www.youtube.com/results?search_query=Eden+Gwautigi+Liebi",
     chords: `[Verse 1]
-[G]Gwautigi Liebi, [D]döif wie ds Meer
-[Em]Dini Gnad strömt [C]über mi
-[G]Hesch alles gäh, [D]dasses mir guet geit
-[Em]I bi für [C]immer di
+[Eb]Wo wär ig [Ab/Eb]ohni  [Eb]Di,
+[Eb]dini Liebi und [Ebsus2]Geduld [Eb]
+[Cm]Wär verlore im dunkle Tal,
+[Bb]ohni Hoffnig und ohni [Fm7]Chraft
 
-[Chorus]
-[G]Gross isch dini [D]Tröii, Vater
-[Em]Unendlich dini [C]Macht
-[G]Dini Liebi [D]schint so hell
-[Em]Dur die [C]dunkelsti Nacht
+[Pre-Chorus]
+[Ab](Doch) du hesch mi gfunde
+[Bb]zmitts i myr [Cm]Not, hesch aus [Eb]überwunde
+[Bb]Hoffnig zieht ii und i gseh vor mir die [Cm]offene
+[Bb]Arme vo dir
+
+[Chorus 1]
+[Eb]Sisch dys Bluet wo aus [Eb/G]überdeckt
+[Ab]sisch di Tod wo my [Bb]uferweckt
+[Cm]oh diä ändlos, [Bb]gwautegi Liebi
+[Ab]zieht mi [Bb]nöcher zu dir
+
+[Chorus 2]
+[Eb]A dä Ort wo aus [Eb/G]usefliesst
+[Ab]wiene Strom, wo aus mit [Bb]sech riist
+[Cm]oh diä ändlos, [Bb]gwautegi Liebi
+[Ab]zieht mi [Bb]nöcher zu dir
 
 [Verse 2]
-[G]Kei Verdammnis [D]gits meh für mi
-[Em]I dr Freiheit [C]loufe ich jetzt
-[G]Du hesch d'Chettene [D]sprängt
-[Em]Mis Härz isch [C]neu verpackt`
+[Eb]Wo wär ig [Ab/Eb]ohni  [Eb]dini Gnad,
+[Eb]dini Füehrig a [Ebsus2]jedem [Eb]Tag
+[Cm]bahnsch e Wäg wos ke Wäg me git,
+[Bb]zeigsch mir ä Zuekunft vou [Fm7]Zueversicht
+
+[Bridge]
+[Ab]Au dini [Bb]Plän für mi si guet
+[Eb/G]I wott dir fouge, [Cm]wohi du mi füehrsch
+[Ab]Jede Schritt wo [Bb]du mir zeigsch [Eb/G]wott ig [Cm]ga
+[Ab]Au dini [Bb]Wort für mi si wahr
+[Eb/G]I wottse gloube, [Cm]o wenn igs no nid gseh
+[Ab]Mini Zueversicht [Bb]und Fröid bisch [Eb]du`
   },
   {
     id: "heilig-bisch-du-herr",
@@ -730,23 +812,31 @@ To [C]fill me`
   {
     id: "du-allei-bisch-gott",
     title: "Du allei bisch Gott",
-    author: "Swiss Worship (Mock)",
-    key: "E",
+    author: "Bene Müller",
+    key: "D",
     bpm: 78,
+    timeSig: "4/4",
     theme: "Anbetung / Majestät",
     language: "de-ch",
+    year: 1990,
+    ccli: 5692322,
     youtube: "https://www.youtube.com/results?search_query=Du+allei+bisch+Gott",
-    chords: `[Verse 1]
-[E]Dini Macht isch [A]unendlich, Herr
-[C#m]Alli Sterne am [B]Himmel singe dir
-[E]Keine isch wie [A]du, so gross
-[C#m]Mir bäte [B]di a
+    chords: `[Intro]
+[D] / [G] / | [D] / [G] /
+[D] / [G] / | [D] / [G] /
+
+[Verse]
+[D]Du al - [G]lei bisch [D]Gott (Du al - [G]lei bisch [D]Gott)
+Dir ghört [G]alli [D]Macht (Dir ghört [G]alli [Bm]Macht)
+Mir si [F#7]dyni [Bm]Chind (Mir si [Bm/A]dyni Chind)
+[Em]Du bisch [Asus]üse  [A]Gott
 
 [Chorus]
-[E]Du allei bisch [A]Gott, Herr
-[C#m]Dir ghört mis [B]Läbe ganz allei
-[E]König vo dr [A]Herrlichkeit, Retter
-[C#m]Du bisch mis [B]Liecht`
+[G]Mit [D]mire [A]ganze [D]Chraft
+[G]Vo [D]Härze [A]Herr
+[G]Mit [D]allem [A]won I [D]bi
+(1.) [G]Han I [D]di [A]gärn
+(2.) [G]Han I [D]di [A]gärn [D]`
   },
   {
     id: "everlasting-god",
@@ -805,6 +895,7 @@ You lift us up on [E]wings like eagles`
     timeSig: "4/4",
     theme: "Hingabe / Intimität",
     language: "de-ch",
+    year: 2021,
     youtube: "https://www.youtube.com/watch?v=u2Gn52sjyjk&t=135s",
     spotify: "https://open.spotify.com/intl-it/track/4OzjBDhYdBAWciVDrhjATp?si=4772be84578c4ce9",
     applemusic: "https://music.apple.com/ch/album/bi-dyne-f%C3%BCess/1614625052?i=1614625053&l=it",
