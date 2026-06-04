@@ -60,7 +60,54 @@ const modalCcliHash = document.getElementById('modalCcliHash');
 const modalAuthorDetail = document.getElementById('modalAuthorDetail');
 const linkYoutube = document.getElementById('linkYoutube');
 const linkSpotify = document.getElementById('linkSpotify');
+const linkAppleMusic = document.getElementById('linkAppleMusic');
 const btnDownloadPDF = document.getElementById('btnDownloadPDF');
+
+// Audio Player Elements
+const modalAudioPlayerContainer = document.getElementById('modalAudioPlayerContainer');
+const audioPlayerBtn = document.getElementById('audioPlayerBtn');
+const audioIconPlay = document.getElementById('audioIconPlay');
+const audioIconPause = document.getElementById('audioIconPause');
+const audioTimeCurrent = document.getElementById('audioTimeCurrent');
+const audioTimeTotal = document.getElementById('audioTimeTotal');
+const audioProgressWrapper = document.getElementById('audioProgressWrapper');
+const audioProgressBar = document.getElementById('audioProgressBar');
+const audioProgressHandle = document.getElementById('audioProgressHandle');
+const mediaLabel = document.getElementById('mediaLabel');
+const audioPlayerLabel = document.getElementById('audioPlayerLabel');
+const modalMediaRow = document.getElementById('modalMediaRow');
+
+let currentAudio = null;
+
+// Metronome State
+let audioCtx = null;
+let isMetronomePlaying = false;
+
+// Key Tone Pitch Finder State
+let keyToneOsc = null;
+let keyToneGainNode = null;
+let isKeyTonePlaying = false;
+
+const NOTE_TO_FREQ = {
+  'C': 261.63,   // C4
+  'C#': 277.18,  // C#4
+  'Db': 277.18,
+  'D': 293.66,   // D4
+  'D#': 311.13,  // D#4
+  'Eb': 311.13,
+  'E': 329.63,   // E4
+  'F': 349.23,   // F4
+  'F#': 369.99,  // F#4
+  'Gb': 369.99,
+  'G': 196.00,   // G3 (Lowered to octave 3 for comfortable, warm singing range)
+  'G#': 207.65,  // G#3
+  'Ab': 207.65,
+  'A': 220.00,   // A3
+  'A#': 233.08,  // A#3
+  'Bb': 233.08,
+  'B': 246.94    // B3
+};
+
 
 // --- Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
@@ -219,6 +266,24 @@ function setupEventListeners() {
   chordModal.addEventListener('click', (e) => {
     if (e.target === chordModal) closeChordModal();
   });
+
+  // Metronome Click Toggle
+  const btnMetronome = document.getElementById('btnMetronome');
+  if (btnMetronome) {
+    btnMetronome.addEventListener('click', () => {
+      if (currentModalSong) {
+        toggleMetronome(currentModalSong.bpm);
+      }
+    });
+  }
+
+  // Key Tone Click Toggle
+  const btnPlayKeyTone = document.getElementById('btnPlayKeyTone');
+  if (btnPlayKeyTone) {
+    btnPlayKeyTone.addEventListener('click', () => {
+      toggleKeyTone();
+    });
+  }
 
   // Key Event for escaping Modal
   document.addEventListener('keydown', (e) => {
@@ -421,9 +486,33 @@ function openChordModal(songId) {
   const songHash = song.ccli || song.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 1047190);
   modalCcliHash.textContent = `CCLI: ${songHash}`;
 
-  // Set Recording Links
-  linkYoutube.href = song.youtube;
-  linkSpotify.href = `https://open.spotify.com/search/${encodeURIComponent(song.title + " " + song.author)}`;
+  // Set Recording Links and toggle visibility based on presence of local audio
+  if (song.audio) {
+    if (modalMediaRow) modalMediaRow.classList.add('has-audio');
+    linkYoutube.style.display = 'none';
+    linkSpotify.style.display = 'none';
+    if (linkAppleMusic) linkAppleMusic.style.display = 'none';
+    mediaLabel.style.display = '';
+    audioPlayerLabel.style.display = 'none';
+
+    setupAudioPlayer(song.audio);
+    modalAudioPlayerContainer.style.display = 'flex';
+  } else {
+    if (modalMediaRow) modalMediaRow.classList.remove('has-audio');
+    linkYoutube.style.display = '';
+    linkSpotify.style.display = '';
+    if (linkAppleMusic) linkAppleMusic.style.display = '';
+    mediaLabel.style.display = '';
+    audioPlayerLabel.style.display = '';
+
+    linkYoutube.href = song.youtube;
+    linkSpotify.href = song.spotify || `https://open.spotify.com/search/${encodeURIComponent(song.title + " " + song.author)}`;
+    if (linkAppleMusic) {
+      linkAppleMusic.href = song.applemusic || `https://music.apple.com/search?term=${encodeURIComponent(song.title + " " + song.author)}`;
+    }
+
+    cleanupAudioPlayer();
+  }
 
   // Update transposer display
   updateTransposerDisplay();
@@ -442,8 +531,278 @@ function closeChordModal() {
   currentModalSong = null;
   currentModalKey = null;
   
+  cleanupAudioPlayer();
+  stopMetronome();
+  stopKeyTone();
+  
   // Restore original website title
   document.title = DEFAULT_TITLE;
+}
+
+// --- Audio Player Helper Functions ---
+
+function setupAudioPlayer(audioUrl) {
+  cleanupAudioPlayer();
+
+  if (!audioUrl) return;
+
+  currentAudio = new Audio(audioUrl);
+
+  audioPlayerBtn.onclick = toggleAudioPlay;
+
+  currentAudio.addEventListener('loadedmetadata', () => {
+    if (!currentAudio) return;
+    audioTimeTotal.textContent = formatAudioTime(currentAudio.duration);
+    audioTimeCurrent.textContent = "0:00";
+    audioProgressBar.style.width = "0%";
+    audioProgressHandle.style.left = "0%";
+  });
+
+  currentAudio.addEventListener('timeupdate', () => {
+    if (!currentAudio) return;
+    const progress = (currentAudio.currentTime / currentAudio.duration) * 100;
+    audioProgressBar.style.width = `${progress}%`;
+    audioProgressHandle.style.left = `${progress}%`;
+    audioTimeCurrent.textContent = formatAudioTime(currentAudio.currentTime);
+  });
+
+  currentAudio.addEventListener('ended', () => {
+    resetAudioUI();
+  });
+
+  audioProgressWrapper.onclick = (e) => {
+    if (!currentAudio || !currentAudio.duration) return;
+    const rect = audioProgressWrapper.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const width = rect.width;
+    const clickPercent = Math.max(0, Math.min(1, clickX / width));
+    
+    currentAudio.currentTime = clickPercent * currentAudio.duration;
+  };
+}
+
+function toggleAudioPlay() {
+  if (!currentAudio) return;
+
+  if (currentAudio.paused) {
+    currentAudio.play().catch(err => console.log("Audio play error:", err));
+    audioIconPlay.style.display = 'none';
+    audioIconPause.style.display = 'block';
+  } else {
+    currentAudio.pause();
+    audioIconPlay.style.display = 'block';
+    audioIconPause.style.display = 'none';
+  }
+}
+
+function resetAudioUI() {
+  audioIconPlay.style.display = 'block';
+  audioIconPause.style.display = 'none';
+  audioTimeCurrent.textContent = "0:00";
+  audioProgressBar.style.width = "0%";
+  audioProgressHandle.style.left = "0%";
+}
+
+function cleanupAudioPlayer() {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio = null;
+  }
+  resetAudioUI();
+  if (modalAudioPlayerContainer) {
+    modalAudioPlayerContainer.style.display = 'none';
+  }
+}
+
+function formatAudioTime(seconds) {
+  if (isNaN(seconds) || seconds === Infinity) return "0:00";
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+}
+
+// --- Metronome Helper Functions ---
+
+function toggleMetronome(bpm) {
+  if (isMetronomePlaying) {
+    stopMetronome();
+  } else {
+    startMetronome(bpm);
+  }
+}
+
+function startMetronome(bpm) {
+  if (isMetronomePlaying) return;
+  
+  // Stop key tone if active to avoid overlaying sounds
+  stopKeyTone();
+  
+  // Initialize Web Audio context (must be user-triggered)
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  
+  // If audio context is suspended, resume it
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+
+  isMetronomePlaying = true;
+  updateMetronomeUI(true);
+
+  const intervalMs = (60 / bpm) * 1000;
+  
+  // Play first click immediately
+  playTickSound();
+  
+  metronomeInterval = setInterval(() => {
+    playTickSound();
+  }, intervalMs);
+}
+
+function playTickSound() {
+  if (!audioCtx || !isMetronomePlaying) return;
+  
+  // We use Web Audio API to synthesize a clean click tone
+  const osc = audioCtx.createOscillator();
+  const gainNode = audioCtx.createGain();
+  
+  osc.connect(gainNode);
+  gainNode.connect(audioCtx.destination);
+  
+  // High pitch for beat click (1000 Hz)
+  osc.frequency.setValueAtTime(1000, audioCtx.currentTime);
+  
+  // Short exponential envelope to prevent popping sounds
+  gainNode.gain.setValueAtTime(0.4, audioCtx.currentTime);
+  gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.06);
+  
+  osc.start(audioCtx.currentTime);
+  osc.stop(audioCtx.currentTime + 0.08);
+  
+  // Visual pulse on the card
+  const metronomeCard = document.getElementById('btnMetronome');
+  if (metronomeCard) {
+    metronomeCard.classList.add('flash');
+    setTimeout(() => {
+      metronomeCard.classList.remove('flash');
+    }, 80);
+  }
+}
+
+function stopMetronome() {
+  if (metronomeInterval) {
+    clearInterval(metronomeInterval);
+    metronomeInterval = null;
+  }
+  isMetronomePlaying = false;
+  updateMetronomeUI(false);
+}
+
+function updateMetronomeUI(isPlaying) {
+  const metronomeCard = document.getElementById('btnMetronome');
+  if (!metronomeCard) return;
+  
+  if (isPlaying) {
+    metronomeCard.classList.add('playing');
+  } else {
+    metronomeCard.classList.remove('playing');
+    metronomeCard.classList.remove('flash');
+  }
+}
+
+// --- Key Tone Pitch Finder Helper Functions ---
+
+function toggleKeyTone() {
+  if (isKeyTonePlaying) {
+    stopKeyTone();
+  } else {
+    if (currentModalKey) {
+      startKeyTone(currentModalKey);
+    }
+  }
+}
+
+function startKeyTone(keyName) {
+  if (isKeyTonePlaying) return;
+
+  // Stop metronome to prevent overlaying sounds
+  stopMetronome();
+
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+
+  isKeyTonePlaying = true;
+  updateKeyToneUI(true);
+
+  // Strip minor 'm' tag to find fundamental note
+  const cleanNote = keyName.replace('m', '').trim();
+  const freq = NOTE_TO_FREQ[cleanNote] || 261.63; // Fallback to Middle C
+
+  keyToneOsc = audioCtx.createOscillator();
+  keyToneGainNode = audioCtx.createGain();
+
+  // Use a triangle wave for a warm, soft organ/flute-like pad sound
+  keyToneOsc.type = 'triangle';
+  keyToneOsc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+  const filter = audioCtx.createBiquadFilter();
+  filter.type = 'lowpass';
+  filter.frequency.setValueAtTime(600, audioCtx.currentTime); // Filter high frequencies
+
+  keyToneOsc.connect(filter);
+  filter.connect(keyToneGainNode);
+  keyToneGainNode.connect(audioCtx.destination);
+
+  // Soft exponential gain envelope to fade-in cleanly without popping
+  keyToneGainNode.gain.setValueAtTime(0.001, audioCtx.currentTime);
+  keyToneGainNode.gain.exponentialRampToValueAtTime(0.25, audioCtx.currentTime + 0.15);
+
+  keyToneOsc.start();
+}
+
+function stopKeyTone() {
+  if (!isKeyTonePlaying) return;
+
+  isKeyTonePlaying = false;
+  updateKeyToneUI(false);
+
+  if (keyToneOsc && keyToneGainNode) {
+    const osc = keyToneOsc;
+    const gain = keyToneGainNode;
+
+    // Smooth exponential ramp down to 0
+    gain.gain.setValueAtTime(gain.gain.value, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+
+    setTimeout(() => {
+      try {
+        osc.stop();
+        osc.disconnect();
+      } catch (err) {
+        // Safe catch
+      }
+    }, 160);
+  }
+
+  keyToneOsc = null;
+  keyToneGainNode = null;
+}
+
+function updateKeyToneUI(isPlaying) {
+  const keyCard = document.getElementById('btnPlayKeyTone');
+  if (!keyCard) return;
+
+  if (isPlaying) {
+    keyCard.classList.add('playing');
+  } else {
+    keyCard.classList.remove('playing');
+  }
 }
 
 function updateTransposerDisplay() {
@@ -492,6 +851,15 @@ function transposeToKey(targetKey) {
   currentModalKey = targetKey;
   updateTransposerDisplay();
   displayChordSheet();
+
+  // If key tone is playing, smoothly glide (portamento) to the new key's frequency
+  if (isKeyTonePlaying && keyToneOsc && audioCtx) {
+    const cleanNote = targetKey.replace('m', '').trim();
+    const freq = NOTE_TO_FREQ[cleanNote];
+    if (freq) {
+      keyToneOsc.frequency.exponentialRampToValueAtTime(freq, audioCtx.currentTime + 0.1);
+    }
+  }
 }
 
 function resetToOriginalKey() {
@@ -748,20 +1116,27 @@ const INTERVAL_TO_DEGREE = {
 };
 
 function chordToNumber(chordStr, key) {
+  const match = chordStr.match(/^([A-G][b#]?[^ /|]*(?:\/[A-G][b#]?[^ /|]*)?)(.*)$/);
+  if (!match) return chordStr;
+
+  const chordVal = match[1];
+  const rest = match[2];
+
   const keyBase = key.replace('m', '');
   const keySemi = NOTE_TO_SEMITONE[keyBase];
 
   if (keySemi === undefined) return chordStr;
 
-  const parts = chordStr.split('/');
+  const parts = chordVal.split('/');
   const baseNum = convertSingleChordToNumber(parts[0], keySemi);
 
+  let finalChord = baseNum;
   if (parts.length > 1) {
     const bassNum = convertNoteToNumber(parts[1], keySemi);
-    return `${baseNum}/${bassNum}`;
+    finalChord = `${baseNum}/${bassNum}`;
   }
 
-  return baseNum;
+  return finalChord + rest;
 }
 
 function convertSingleChordToNumber(chordPart, keySemi) {
@@ -790,17 +1165,24 @@ function convertNoteToNumber(note, keySemi) {
 
 // --- Chord Transposition Core Helpers ---
 function transposeChord(chordStr, shift, useFlats) {
+  const match = chordStr.match(/^([A-G][b#]?[^ /|]*(?:\/[A-G][b#]?[^ /|]*)?)(.*)$/);
+  if (!match) return chordStr;
+
+  const chordVal = match[1];
+  const rest = match[2];
+
   if (shift === 0) return chordStr;
 
-  const parts = chordStr.split('/');
+  const parts = chordVal.split('/');
   const rootChordTransposed = transposeSingleRootChord(parts[0], shift, useFlats);
   
+  let finalChord = rootChordTransposed;
   if (parts.length > 1) {
     const bassTransposed = shiftNote(parts[1], shift, useFlats);
-    return `${rootChordTransposed}/${bassTransposed}`;
+    finalChord = `${rootChordTransposed}/${bassTransposed}`;
   }
 
-  return rootChordTransposed;
+  return finalChord + rest;
 }
 
 function transposeSingleRootChord(chordPart, shift, useFlats) {

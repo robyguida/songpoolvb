@@ -1069,41 +1069,78 @@ button, input, select {
 /* Media Search Pills */
 .modal-media-row {
   display: flex;
-  gap: 0.75rem;
+  align-items: center;
+  gap: 0.85rem;
   margin-bottom: 1.75rem;
   flex-wrap: wrap;
 }
 
-.btn-media-pill {
+.modal-media-row.has-audio {
+  margin-bottom: 0.6rem;
+}
+
+.media-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  font-weight: 700;
+  margin-right: 0.25rem;
+}
+
+.media-icon-link {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  background: rgba(15, 23, 42, 0.02);
-  border: 1px solid rgba(15, 23, 42, 0.06);
-  padding: 0.4rem 0.9rem;
-  border-radius: 9999px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-secondary);
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
   transition: all var(--transition-fast);
+  cursor: pointer;
+  background: transparent;
+  border: none;
 }
 
-.btn-media-pill svg {
-  opacity: 0.8;
+.media-icon-link svg, .media-icon-link img {
+  transition: transform var(--transition-fast);
+  display: block;
+  object-fit: contain;
 }
 
-.btn-media-pill:hover {
-  background: rgba(220, 38, 38, 0.08);
-  border-color: rgba(220, 38, 38, 0.18);
-  color: #dc2626;
-  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.1);
+.media-icon-link.link-youtube img {
+  width: 2.15rem;
+  height: 2.15rem;
 }
 
-.btn-media-pill.btn-media-spotify:hover {
-  background: rgba(34, 197, 94, 0.08);
-  border-color: rgba(34, 197, 94, 0.18);
-  color: #16a34a;
-  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.1);
+.media-icon-link.link-spotify img {
+  width: 2.6rem;
+  height: 2.6rem;
+}
+
+.media-icon-link.link-applemusic img {
+  width: 2.15rem;
+  height: 2.15rem;
+}
+
+
+.media-icon-link:hover {
+  transform: scale(1.1);
+}
+
+.media-icon-link.link-youtube:hover img {
+  filter: drop-shadow(0 4px 10px rgba(255, 0, 0, 0.45));
+}
+
+.media-icon-link.link-spotify:hover img {
+  filter: drop-shadow(0 4px 10px rgba(30, 215, 96, 0.45));
+}
+
+.media-icon-link.link-applemusic:hover img {
+  filter: drop-shadow(0 4px 10px rgba(252, 60, 68, 0.45));
+}
+
+.media-icon-link:active {
+  transform: scale(0.95);
 }
 
 /* Golden Alert notice banner */
@@ -2107,5 +2144,323 @@ section-header + .lyric-line {
   }
 }
 
+/* Private Audio Player Styling */
+.modal-audio-player-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
 
+.audio-player-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  font-weight: 700;
+}
 
+.audio-player-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(15, 23, 42, 0.025);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  padding: 0.5rem 0.85rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 480px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.audio-player-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  background: var(--accent-indigo);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 6px var(--accent-indigo-glow);
+  flex-shrink: 0;
+}
+
+.audio-player-btn:hover {
+  background: var(--accent-indigo-hover);
+  transform: scale(1.05);
+}
+
+.audio-player-btn:active {
+  transform: scale(0.95);
+}
+
+.audio-time-label {
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  user-select: none;
+  min-width: 2.5rem;
+  text-align: center;
+}
+
+.audio-progress-bar-wrapper {
+  position: relative;
+  flex-grow: 1;
+  height: 0.35rem;
+  background: rgba(15, 23, 42, 0.08);
+  border-radius: 9999px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.audio-progress-bar {
+  height: 100%;
+  background: var(--accent-indigo);
+  border-radius: 9999px;
+  width: 0%;
+  pointer-events: none;
+  transition: background var(--transition-fast);
+}
+
+.audio-progress-handle {
+  position: absolute;
+  left: 0%;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: var(--accent-indigo-light);
+  border: 1.5px solid white;
+  transform: translate(-50%, 0);
+  opacity: 0;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  pointer-events: none;
+}
+
+.audio-progress-bar-wrapper:hover .audio-progress-handle {
+  opacity: 1;
+}
+
+.audio-progress-bar-wrapper:hover .audio-progress-bar {
+  background: var(--accent-indigo-light);
+}
+
+@media (max-width: 480px) {
+  .audio-player-card {
+    max-width: 100%;
+  }
+}
+
+/* Metronome Card Styling */
+.info-stat-card.stat-card-metronome {
+  cursor: pointer;
+  position: relative;
+  transition: all var(--transition-fast);
+  overflow: hidden;
+  user-select: none;
+}
+
+.info-stat-card.stat-card-metronome:hover {
+  background: rgba(15, 23, 42, 0.045);
+  border-color: rgba(15, 23, 42, 0.12);
+}
+
+.info-stat-card.stat-card-metronome:active {
+  transform: scale(0.97);
+}
+
+/* Playing state */
+.info-stat-card.stat-card-metronome.playing {
+  border-color: var(--accent-gold) !important;
+  background: rgba(180, 83, 9, 0.04) !important;
+}
+
+.info-stat-card.stat-card-metronome.playing .info-card-icon {
+  color: var(--accent-gold) !important;
+}
+
+.info-stat-card.stat-card-metronome.playing .info-card-value {
+  color: var(--accent-gold) !important;
+  font-weight: 700;
+}
+
+/* Flash animation on beat */
+.info-stat-card.stat-card-metronome.flash {
+  background: rgba(180, 83, 9, 0.18) !important;
+  border-color: var(--accent-gold) !important;
+  box-shadow: 0 0 12px rgba(180, 83, 9, 0.25);
+}
+
+/* Metronome double-icon styling */
+.info-stat-card.stat-card-metronome #metronomeIconNormal {
+  display: block !important;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.info-stat-card.stat-card-metronome.playing #metronomeIconNormal {
+  color: var(--accent-gold) !important;
+}
+
+.metronome-action-indicator {
+  margin-left: auto;
+  width: 1.45rem;
+  height: 1.45rem;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  color: var(--text-secondary);
+}
+
+.metronome-action-indicator svg {
+  width: 0.75rem;
+  height: 0.75rem;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+/* Default state: show play, hide stop */
+.metronome-action-indicator .indicator-play {
+  display: block;
+}
+.metronome-action-indicator .indicator-stop {
+  display: none;
+}
+
+/* Hover when stopped: background turns gold, play icon turns white */
+.info-stat-card.stat-card-metronome:not(.playing):hover .metronome-action-indicator {
+  background: var(--accent-gold);
+  color: #ffffff;
+  transform: scale(1.1);
+  box-shadow: 0 2px 6px rgba(180, 83, 9, 0.2);
+}
+
+/* Playing state: background is gold, stop icon is shown, play icon is hidden */
+.info-stat-card.stat-card-metronome.playing .metronome-action-indicator {
+  background: var(--accent-gold);
+  color: #ffffff;
+}
+
+.info-stat-card.stat-card-metronome.playing .metronome-action-indicator .indicator-play {
+  display: none !important;
+}
+
+.info-stat-card.stat-card-metronome.playing .metronome-action-indicator .indicator-stop {
+  display: block !important;
+}
+
+/* Hover when playing: background turns rose/red, stop icon remains white */
+.info-stat-card.stat-card-metronome.playing:hover .metronome-action-indicator {
+  background: var(--accent-rose) !important;
+  transform: scale(1.1);
+  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.2);
+}
+
+/* Key Tone Card Styling */
+.info-stat-card.stat-card-keytone {
+  cursor: pointer;
+  position: relative;
+  transition: all var(--transition-fast);
+  overflow: hidden;
+  user-select: none;
+}
+
+.info-stat-card.stat-card-keytone:hover {
+  background: rgba(15, 23, 42, 0.045);
+  border-color: rgba(15, 23, 42, 0.12);
+}
+
+.info-stat-card.stat-card-keytone:active {
+  transform: scale(0.97);
+}
+
+/* Playing state */
+.info-stat-card.stat-card-keytone.playing {
+  border-color: var(--accent-gold) !important;
+  background: rgba(180, 83, 9, 0.04) !important;
+}
+
+.info-stat-card.stat-card-keytone.playing .info-card-icon {
+  color: var(--accent-gold) !important;
+}
+
+.info-stat-card.stat-card-keytone.playing .info-card-value {
+  color: var(--accent-gold) !important;
+  font-weight: 700;
+}
+
+/* Left Key Tone icon transition */
+.info-stat-card.stat-card-keytone #keyToneIconNormal {
+  display: block !important;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.info-stat-card.stat-card-keytone.playing #keyToneIconNormal {
+  color: var(--accent-gold) !important;
+}
+
+/* Action indicator */
+.keytone-action-indicator {
+  margin-left: auto;
+  width: 1.45rem;
+  height: 1.45rem;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  color: var(--text-secondary);
+}
+
+.keytone-action-indicator svg {
+  width: 0.75rem;
+  height: 0.75rem;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+/* Default state: show play, hide stop */
+.keytone-action-indicator .indicator-play {
+  display: block;
+}
+.keytone-action-indicator .indicator-stop {
+  display: none;
+}
+
+/* Hover when stopped: background turns gold, play icon turns white */
+.info-stat-card.stat-card-keytone:not(.playing):hover .keytone-action-indicator {
+  background: var(--accent-gold);
+  color: #ffffff;
+  transform: scale(1.1);
+  box-shadow: 0 2px 6px rgba(180, 83, 9, 0.2);
+}
+
+/* Playing state: background is gold, stop icon is shown, play icon is hidden */
+.info-stat-card.stat-card-keytone.playing .keytone-action-indicator {
+  background: var(--accent-gold);
+  color: #ffffff;
+}
+
+.info-stat-card.stat-card-keytone.playing .keytone-action-indicator .indicator-play {
+  display: none !important;
+}
+
+.info-stat-card.stat-card-keytone.playing .keytone-action-indicator .indicator-stop {
+  display: block !important;
+}
+
+/* Hover when playing: background turns rose/red, stop icon remains white */
+.info-stat-card.stat-card-keytone.playing:hover .keytone-action-indicator {
+  background: var(--accent-rose) !important;
+  transform: scale(1.1);
+  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.2);
+}

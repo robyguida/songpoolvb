@@ -15,7 +15,9 @@ const SONGS = [
     theme: "Anbetung",
     language: "de-ch",
     ccli: 7214213,
-    youtube: "https://www.youtube.com/results?search_query=VIBE+Chum+zu+mir",
+    youtube: "https://www.youtube.com/watch?v=f9HQDMDA3ts&list=RDf9HQDMDA3ts&start_radio=1&pp=ygUQVklCRSBDaHVtIHp1IG1pcqAHAQ%3D%3D",
+    spotify: "https://open.spotify.com/intl-it/track/66bVWz8jLrnxJqEPjXufd5?si=08d68fe0d0804b62",
+    applemusic: "https://music.apple.com/ch/album/chum-zu-mir-live/1673515520?i=1673516065&l=it",
     chords: `[Intro]
 [C] / / / | / / / / | / / / / | / / / /
 
@@ -88,6 +90,7 @@ const SONGS = [
     theme: "Dankbarkeit / Kreuz",
     language: "de-ch",
     youtube: "https://www.youtube.com/results?search_query=Cornelia+Guida+Danke+f%C3%BCr+dis+Chr%C3%BCz",
+    audio: "Danke für dis Chrüz.mp3",
     chords: `[Intro]
 [E] / / / | / / [B/D#] / | [C#m7] / / / | / / [E/B] /
 [A] / [B/A] / | [A] / [B/A] / | [E] / / / | [A/E] / [E] /
@@ -803,6 +806,8 @@ You lift us up on [E]wings like eagles`
     theme: "Hingabe / Intimität",
     language: "de-ch",
     youtube: "https://www.youtube.com/watch?v=u2Gn52sjyjk&t=135s",
+    spotify: "https://open.spotify.com/intl-it/track/4OzjBDhYdBAWciVDrhjATp?si=4772be84578c4ce9",
+    applemusic: "https://music.apple.com/ch/album/bi-dyne-f%C3%BCess/1614625052?i=1614625053&l=it",
     chords: `[Intro]
 [E] / / / | [A] / / / | [E] / / / | [A] / / /
 
@@ -815,30 +820,38 @@ You lift us up on [E]wings like eagles`
 [Instrumental]
 [E] / / / | [A] / / / | [E] / / / | [A] / / /
 
+[Verse]
+
 [Pre-Chorus]
-[F#m]Niene süsch [A]wott i sy
-[C#m]myni Fröid isch wäge dir[H]
-[F#m]niene süsch [A]wott i sy
-aus bi [H]dir
+[F#m] Niene süsch [A] wott i sy
+[C#m] myni Fröid isch wäge dir[B]
+[F#m] niene süsch [A] wott i sy
+aus bi dir [B / / / | / / / / ]
 
 [Chorus]
 Da fliesst [A]Öl über mi
-dys [H]Agsicht darf i gseh
+dys [B]Agsicht darf i gseh
 bi [E/G#]dir herrscht ke Mangel
 dr [C#m]Bächer isch voll für mi
-
+Da fliesst [A]Öl über mi
+dys [B]Agsicht darf i gseh
+bi [E/G#]dir herrscht ke Mangel
+dr [C#m]Tisch isch deckt für mi
 [Chorus]
 
-[Bridge]
-Bi dyne [A]Füess Jesus isch my Lieblings[H]platz
-i liebe nüt meh [E/G#]als dyni Gägewart[A]
-bi dyne [A]Füess Jesus füehl i mi so [H]gliebt
-es isch dr Ort woni wott sy[E/G#]
-jede [C#m]Tag u j[H]edi Nacht[A]
+[Interlude]
+[A] / / / | [B] / / / | [E/G#] / / / | [A] / / /
 
-[Tag]
-Jede [A]Tag u j[E/G#]edi Nacht[H]
-jede [C#m]Tag u j[H]edi Nacht[A]`
+[Bridge (3x)]
+Bi dyne Fü[A]ess Jesus isch my Lieblings[B]platz
+i liebe nüt meh [E/G#]als dyni Gägewa[A]rt
+bi dyne Fü[A]ess Jesus füehl i mi so glie[B]bt
+es isch dr Ort woni wott sy[E/G#]
+jede [C#m]Tag u j[B]edi Nacht[A]
+
+[Tag (2x)]
+Jede [A]Tag u j[E/G#]edi Nacht[B]
+jede [C#m]Tag u j[B]edi Nacht[A]`
   },
   {
     id: "i-believe",
