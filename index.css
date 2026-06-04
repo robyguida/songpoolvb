@@ -405,7 +405,8 @@ button, input, select {
 
 .table-header {
   display: grid;
-  grid-template-columns: 2.2fr 1.6fr 0.7fr 0.8fr 1.3fr 1.4fr;
+  grid-template-columns: 2.2fr 1.6fr 0.6fr 0.6fr 1.2fr 1.4fr 1.1fr;
+  column-gap: 1.25rem; /* Gap between columns */
   padding: 0.85rem 1.5rem;
   border-bottom: 1px solid var(--border-color);
   color: var(--text-secondary);
@@ -430,7 +431,8 @@ button, input, select {
 
 .song-row {
   display: grid;
-  grid-template-columns: 2.2fr 1.6fr 0.7fr 0.8fr 1.3fr 1.4fr;
+  grid-template-columns: 2.2fr 1.6fr 0.6fr 0.6fr 1.2fr 1.4fr 1.1fr;
+  column-gap: 1.25rem; /* Gap between columns */
   padding: 0.9rem 1.5rem;
   border-bottom: 1px solid rgba(15, 23, 42, 0.04);
   align-items: center;
@@ -566,7 +568,10 @@ button, input, select {
 /* Row Action Buttons */
 .col-actions {
   gap: 0.625rem;
-  justify-content: flex-end;
+  justify-content: center;
+  justify-self: stretch;
+  text-align: center;
+  width: 100%;
   padding-right: 0;
 }
 
@@ -582,7 +587,33 @@ button, input, select {
   transition: all var(--transition-fast);
 }
 
-/* Obsolete row chords button removed */
+.btn-view-chords {
+  background: var(--bg-card);
+  color: var(--accent-indigo);
+  border: 1.5px solid var(--accent-indigo);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-view-chords:hover {
+  background: var(--accent-indigo);
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
+  transform: translateY(-1px);
+}
+
+.btn-view-chords:active {
+  transform: translateY(0);
+}
 
 .btn-row-add {
   background: rgba(79, 70, 229, 0.06);
@@ -1722,7 +1753,7 @@ section-header + .lyric-line {
   .song-row {
     display: grid !important;
     grid-template-columns: auto auto auto 1fr auto;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto auto auto;
     gap: 0.4rem 0.75rem;
     align-items: center;
     padding: 1.1rem 1.25rem;
@@ -1756,7 +1787,7 @@ section-header + .lyric-line {
     grid-row: 2;
     font-size: 0.85rem;
     color: var(--text-secondary);
-    padding-left: 2.7rem; /* Align perfectly under title text (skipping play button) */
+    padding-left: 0; /* Align perfectly under title text since play button is gone */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1766,7 +1797,7 @@ section-header + .lyric-line {
   .song-row .col-key {
     grid-column: 1;
     grid-row: 3;
-    padding-left: 2.7rem; /* Align under author and title text */
+    padding-left: 0; /* Align under author and title text */
     width: auto !important;
   }
   
@@ -1809,21 +1840,28 @@ section-header + .lyric-line {
     margin-right: 0.5rem;
     color: var(--text-muted);
   }
+
+  /* Row 4: Akkorde / PDF Action Button */
+  .song-row .col-chords {
+    grid-column: 1 / 5;
+    grid-row: 4;
+    padding-left: 0;
+    margin-top: 0.4rem;
+  }
+
+  .song-row .col-chords .btn-view-chords {
+    width: 100%;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+  }
   
   /* Right Column: Action Button spans all rows */
   .song-row .col-actions {
     grid-column: 5;
-    grid-row: 1 / 4;
+    grid-row: 1 / 5; /* Spans all 4 rows on mobile */
     justify-self: end;
     padding-right: 0;
     width: auto !important;
-  }
-  
-  /* Make play button highly visible and responsive on touch */
-  .song-row .row-play-icon {
-    width: 2.1rem;
-    height: 2.1rem;
-    opacity: 1; /* Always visible on mobile touch screens! */
   }
   
   /* Make add button touch friendly */
