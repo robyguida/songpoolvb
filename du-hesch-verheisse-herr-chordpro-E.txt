@@ -1,0 +1,32 @@
+{title: Du hesch verheisse Herr}
+{artist: Bene Müller}
+{key: E}
+{ccli_license: 1253398}
+{ccli: 5693304}
+{copyright: 1999 Müller, Bene}
+{footer: Nutzung ausschließlich im Rahmen der SongSelect®-Nutzungsbedingungen. Alle Rechte vorbehalten. www.ccli.com}
+
+{comment: Vers 1}
+[E]Du [B]hesch ver - [A]heisse [B]Herr 
+[E]Dass du mit [A]üs zäme [B]bisch 
+[E]We [B]mir di [A]sueche [B]tüe 
+De [A]chunnsch du und [B]wohnsch unter [E]üs [B][A][B]
+
+{comment: Chorus}
+[E]Jetz [B]stöh [A]mir vor [B]dir 
+[E]Plange druf [A]dass du di [B]zeigesch 
+[E]Chumm [B]und [A]füll üses [B]Härz 
+[F#m7]Still du ds’Ver - [G#m7]lange die [A]Sehnsucht nach [B]dir 
+[A]Zünd üses [B]Füür wieder [E]a [B][A][B][E][A][B][(E)]
+
+{comment: Vers 2}
+[E]Mir si [B]nid al - [A]leini [B]cho 
+[E]Hei dir no [A]öppis mit - [B]bracht 
+[E]Bärn [B]üsi [A]gliebti [B]Stadt 
+Er - [A]barm du di [B]ou über [E]si [B][A][B]
+
+
+CCLI-Liednummer  5693304
+© 1999 Müller, Bene
+Nutzung ausschließlich im Rahmen der SongSelect®-Nutzungsbedingungen. Alle Rechte vorbehalten. www.ccli.com
+CCLI-Lizenznummer  1253398

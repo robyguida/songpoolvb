@@ -1,0 +1,52 @@
+{title: Gwautegi Liebi}
+{artist: Cornelia Guida, Esther Weiss, Fabian Schmid, Marc Steiner, Maria Fiechter, Michael Hauser, Nino Luca Küenzi}
+{key: Eb}
+{time: 6/8}
+{tempo: 168}
+{ccli_license: 1253398}
+{ccli: 7176315}
+{copyright: 2021 Eden Music}
+{footer: Nutzung ausschließlich im Rahmen der SongSelect®-Nutzungsbedingungen. Alle Rechte vorbehalten. www.ccli.com}
+
+{comment: Vers 1}
+[Eb]Wo wär ig [Ab/Eb]ohni [Eb]Di,
+[Eb]dini Liebi [Ebsus2]und [Eb]Geduld
+[Cm]Wär verlore im dunkle Tal,
+[Bb]ohni Hoffnig und ohni [Fm7]Chraft
+
+{comment: Pre-Chorus}
+(Doch) [Ab]du hesch mi gfunde
+[Bb]zmitts i myr Not, hesch [Cm]aus über[Eb]wunde
+[Bb]Hoffnig zieht ii und i gseh vor mir die [Cm]offene
+Arme vo [Bb]dir
+
+{comment: Chorus 1}
+Sisch dys [Eb]Bluet wo aus über[Eb/G]deckt
+sisch di [Ab]Tod wo my ufer[Bb]weckt
+oh diä [Cm]ändlos, gwautegi [Bb]Liebi
+zieht [Ab]mi nöcher zu [Bb]dir
+
+{comment: Chorus 2}
+A dä [Eb]Ort wo aus use[Eb/G]fliesst 
+wiene [Ab]Strom, wo aus mit sech [Bb]riist
+oh diä [Cm]ändlos, gwautegi [Bb]Liebi
+zieht [Ab]mi nöcher zu [Bb]dir
+
+{comment: Vers 2}
+[Eb]Wo wär ig ohni [Ab/Eb]dini [Eb]Gnad
+[Eb]dini Füehrig a [Ebsus2]jedem [Eb]Tag
+[Cm]bahnsch e Wäg wos ke Wäg me git
+[Bb]zeigsch mir ä Zuekunft vou [Fm7]Zueversicht
+
+{comment: Bridge}
+Au dini [Ab]Plän für mi si [Bb]guet
+I wott dir [Eb/G]fouge, wo[Cm]hi du mi füehrsch
+Jede [Ab]Schritt wo du mir [Bb]zeigsch wott ig [Eb/G]ga [Cm]
+Au dini [Ab]Wort für mi si [Bb]wahr
+I wottse [Eb/G]gloube, o wenn [Cm]igs no nid gseh
+Mini [Ab]Zueversicht und [Bb]Fröid bisch [Eb]du
+
+CCLI-Liednummer  7176315
+© 2021 Eden Music
+Nutzung ausschließlich im Rahmen der SongSelect®-Nutzungsbedingungen. Alle Rechte vorbehalten. www.ccli.com
+CCLI-Lizenznummer  1253398

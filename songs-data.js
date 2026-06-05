@@ -298,42 +298,42 @@ I danke [E]dir für dini Gägewart, i bi [A]gärn bi dir
     ccli: 7176315,
     youtube: "https://www.youtube.com/results?search_query=Eden+Gwautigi+Liebi",
     chords: `[Verse 1]
-[Eb]Wo wär ig [Ab/Eb]ohni  [Eb]Di,
-[Eb]dini Liebi und [Ebsus2]Geduld [Eb]
+[Eb]Wo wär ig [Ab/Eb]ohni [Eb]Di,
+[Eb]dini Liebi [Ebsus2]und [Eb]Geduld
 [Cm]Wär verlore im dunkle Tal,
 [Bb]ohni Hoffnig und ohni [Fm7]Chraft
 
 [Pre-Chorus]
-[Ab](Doch) du hesch mi gfunde
-[Bb]zmitts i myr [Cm]Not, hesch aus [Eb]überwunde
+(Doch) [Ab]du hesch mi gfunde
+[Bb]zmitts i myr Not, hesch [Cm]aus über[Eb]wunde
 [Bb]Hoffnig zieht ii und i gseh vor mir die [Cm]offene
-[Bb]Arme vo dir
+Arme vo [Bb]dir
 
 [Chorus 1]
-[Eb]Sisch dys Bluet wo aus [Eb/G]überdeckt
-[Ab]sisch di Tod wo my [Bb]uferweckt
-[Cm]oh diä ändlos, [Bb]gwautegi Liebi
-[Ab]zieht mi [Bb]nöcher zu dir
+Sisch dys [Eb]Bluet wo aus über[Eb/G]deckt
+sisch di [Ab]Tod wo my ufer[Bb]weckt
+oh diä [Cm]ändlos, gwautegi [Bb]Liebi
+zieht [Ab]mi nöcher zu [Bb]dir
 
 [Chorus 2]
-[Eb]A dä Ort wo aus [Eb/G]usefliesst
-[Ab]wiene Strom, wo aus mit [Bb]sech riist
-[Cm]oh diä ändlos, [Bb]gwautegi Liebi
-[Ab]zieht mi [Bb]nöcher zu dir
+A dä [Eb]Ort wo aus use[Eb/G]fliesst 
+wiene [Ab]Strom, wo aus mit sech [Bb]riist
+oh diä [Cm]ändlos, gwautegi [Bb]Liebi
+zieht [Ab]mi nöcher zu [Bb]dir
 
 [Verse 2]
-[Eb]Wo wär ig [Ab/Eb]ohni  [Eb]dini Gnad,
+[Eb]Wo wär ig ohni [Ab/Eb]dini [Eb]Gnad
 [Eb]dini Füehrig a [Ebsus2]jedem [Eb]Tag
-[Cm]bahnsch e Wäg wos ke Wäg me git,
+[Cm]bahnsch e Wäg wos ke Wäg me git
 [Bb]zeigsch mir ä Zuekunft vou [Fm7]Zueversicht
 
 [Bridge]
-[Ab]Au dini [Bb]Plän für mi si guet
-[Eb/G]I wott dir fouge, [Cm]wohi du mi füehrsch
-[Ab]Jede Schritt wo [Bb]du mir zeigsch [Eb/G]wott ig [Cm]ga
-[Ab]Au dini [Bb]Wort für mi si wahr
-[Eb/G]I wottse gloube, [Cm]o wenn igs no nid gseh
-[Ab]Mini Zueversicht [Bb]und Fröid bisch [Eb]du`
+Au dini [Ab]Plän für mi si [Bb]guet
+I wott dir [Eb/G]fouge, wo[Cm]hi du mi füehrsch
+Jede [Ab]Schritt wo du mir [Bb]zeigsch wott ig [Eb/G]ga [Cm]
+Au dini [Ab]Wort für mi si [Bb]wahr
+I wottse [Eb/G]gloube, o wenn [Cm]igs no nid gseh
+Mini [Ab]Zueversicht und [Bb]Fröid bisch [Eb]du`
   },
   {
     id: "heilig-bisch-du-herr",
@@ -967,24 +967,35 @@ jede [C#m]Tag u j[B]edi Nacht[A]`
   },
   {
     id: "du-hesch-verheisse-herr",
-    title: "Du hesch verheisse, Herr",
-    author: "German Worship (Mock)",
-    key: "G",
+    title: "Du hesch verheisse Herr",
+    author: "Bene Müller",
+    key: "E",
     bpm: 72,
-    theme: "Vertrauen / Verheissungen",
+    timeSig: "4/4",
+    theme: "Anbetung / Gegenwart Gottes",
     language: "de-ch",
-    youtube: "https://www.youtube.com/results?search_query=Du+hesch+verheisse+Herr",
+    year: 1999,
+    ccli: 5693304,
+    audio: "du-hesch-verheisse.mp3",
+    youtube: "https://www.youtube.com/results?search_query=Bene+M%C3%BCller+Du+hesch+verheisse+Herr",
     chords: `[Verse 1]
-[G]Du hesch verheisse, [C]Herr, dass du bi uns[G]bisch
-[Em]Dass dine Segen[Am]nie und nimmer[D]bricht
-[G]Mir stöh auf[C]dine Verheiss[G]ige fest
-[Em]Du bisch dr[D]Fels, wo uns nie[G]verlässt
+[E]Du [B]hesch ver - [A]heisse [B]Herr 
+[E]Dass du mit [A]üs zäme [B]bisch 
+[E]We [B]mir di [A]sueche [B]tüe 
+De [A]chunnsch du und [B]wohnsch unter [E]üs [B][A][B]
 
 [Chorus]
-[C]Mir beuge uns[G]vor dir, oh Fels vo dr[D]Ewigkeit
-[Em]Dini Tröii[C]währt bis in d'Un[D]endlichkeit
-[C]Du hesch verheisse, [G]und du blibsch[D]treu
-[C]Erfülle uns[D]jetzt ganz[G]neu`
+[E]Jetz [B]stöh [A]mir vor [B]dir 
+[E]Plange druf [A]dass du di [B]zeigesch 
+[E]Chumm [B]und [A]füll üses [B]Härz 
+[F#m7]Still du ds’Ver - [G#m7]lange die [A]Sehnsucht nach [B]dir 
+[A]Zünd üses [B]Füür wieder [E]a [B][A][B][E][A][B][(E)]
+
+[Verse 2]
+[E]Mir si [B]nid al - [A]leini [B]cho 
+[E]Hei dir no [A]öppis mit - [B]bracht 
+[E]Bärn [B]üsi [A]gliebti [B]stadt 
+Er - [A]barm du di [B]ou über [E]si [B][A][B]`
   }
 ];
 
