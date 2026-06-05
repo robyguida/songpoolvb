@@ -1920,6 +1920,7 @@ section-header + .lyric-line {
   .app-header {
     margin-bottom: 1.75rem;
     gap: 1rem;
+    position: relative;
   }
   
   .header-left {
@@ -2009,32 +2010,43 @@ section-header + .lyric-line {
     gap: 0.5rem !important;
   }
 
-  /* Reduce the size of the Sonntags-Setlist button */
+  /* Reduce the size and expand the Sonntags-Setlist button to full-width */
   .btn-setlist-toggle {
-    padding: 0.5rem 0.85rem !important;
-    font-size: 0.8rem !important;
+    padding: 0.55rem 0.85rem !important;
+    font-size: 0.85rem !important;
     gap: 0.4rem !important;
     border-radius: 0.5rem !important;
+    width: 100% !important;
+    justify-content: center !important;
   }
 
   .btn-setlist-toggle .count-badge {
     padding: 0.1rem 0.35rem !important;
-    font-size: 0.7rem !important;
-    min-width: 1.1rem !important;
-    height: 1.1rem !important;
+    font-size: 0.75rem !important;
+    min-width: 1.15rem !important;
+    height: 1.15rem !important;
   }
 
-  /* Make logout button match the smaller setlist button size */
+  /* Absolute position the logout button at top right, matching logo height */
   .btn-logout {
-    width: 2rem !important;
-    height: 2rem !important;
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    width: 2.2rem !important;
+    height: 2.2rem !important;
     padding: 0 !important;
     border-radius: 0.5rem !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15, 23, 42, 0.05) !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+    color: var(--text-secondary) !important;
   }
 
   .btn-logout svg {
-    width: 1.05rem !important;
-    height: 1.05rem !important;
+    width: 1.1rem !important;
+    height: 1.1rem !important;
   }
 }
 
