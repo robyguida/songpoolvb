@@ -63,6 +63,11 @@
   padding: 0;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   background-color: var(--bg-primary);
   background-image: 
@@ -1829,6 +1834,9 @@ section-header + .lyric-line {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    min-width: 0;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
   
   /* Row 3: Meta elements (Key, BPM, Theme) */
