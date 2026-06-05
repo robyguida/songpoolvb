@@ -92,7 +92,7 @@ const SONGS = [
     language: "de-ch",
     year: 2025,
     youtube: "https://www.youtube.com/results?search_query=Cornelia+Guida+Danke+f%C3%BCr+dis+Chr%C3%BCz",
-    audio: "Danke für dis Chrüz.mp3",
+    audio: "danke-fuer-dis-chruez.mp3",
     chords: `[Intro]
 [E] / / / | / / [B/D#] / | [C#m7] / / / | / / [E/B] /
 [A] / [B/A] / | [A] / [B/A] / | [E] / / / | [A/E] / [E] /
@@ -216,7 +216,7 @@ Mis Härz tuet das [C#]nie, mis Härz tuet das [G#]nie
     theme: "Anbetung / Hingabe",
     language: "de-ch",
     year: 2018,
-    audio: "Du bisch mi Gott.mp3",
+    audio: "du-bisch-mi-gott.mp3",
     youtube: "https://www.youtube.com/results?search_query=Romano+Soltermann+Du+bisch+mi+Gott",
     chords: `[Intro]
 [E] [A>] / / | [E] [A>] / / | [E] [A>] / / | [E] [A>] / / 
