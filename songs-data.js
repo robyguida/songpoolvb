@@ -970,7 +970,7 @@ jede [C#m]Tag u j[B]edi Nacht[A]`
     title: "Du hesch verheisse Herr",
     author: "Bene Müller",
     key: "E",
-    bpm: 72,
+    bpm: 155,
     timeSig: "4/4",
     theme: "Anbetung / Gegenwart Gottes",
     language: "de-ch",
